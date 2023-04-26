@@ -1,0 +1,313 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;500&display=swap");
+html, body {
+  height: 100%;
+  background-color: #F7F8F7; }
+
+body {
+  font: 14px "Nunito", "Noto Sans TC",  蘋果儷中黑, 微軟雅黑體, "sans-serif", "小塚ゴシック Pro", ヒラギノ角ゴ;
+  letter-spacing: 1px;
+  line-height: 1.5em; }
+
+a {
+  transition: all .15s ease-in-out; }
+  a:hover {
+    text-decoration: none; }
+
+.text-bg-color {
+  color: #35647e; }
+
+.btn-default {
+  background-color: #35647e;
+  color: #fff;
+  font-size: 1em;
+  padding: 0.7em;
+  min-width: 200px; }
+  .btn-default:hover {
+    background-color: #8DAFC2;
+    color: #fff; }
+
+.main-wrap {
+  min-height: 600px;
+  padding-top: 2em;
+  padding-bottom: 2.5em; }
+  .main-wrap a {
+    color: #35647e;
+    text-decoration: underline; }
+    .main-wrap a:hover {
+      text-decoration: none; }
+  .main-wrap .main-title {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 1em 0 1.5em;
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #1E252B; }
+
+.sm-wrap {
+  max-width: 550px;
+  width: 100%;
+  margin: 1em auto; }
+
+.tag-skill {
+  background-color: #6ba1cb; }
+
+.tag-sport {
+  background-color: #e3a954; }
+
+.tag-entertainment {
+  background-color: #b193b6; }
+
+.tag-art {
+  background-color: #DEA4A4; }
+
+.tag-language {
+  background-color: #97A884; }
+
+.tag-book {
+  background-color: #836565; }
+
+.tab-other {
+  background-color: #7cb4af; }
+
+.modal-header {
+  border-bottom: 0;
+  background-color: #35647e;
+  color: #fff; }
+  .modal-header .modal-title {
+    margin: auto;
+    color: #fff; }
+
+.modal-body {
+  background-color: #DFE4E6;
+  color: #7f7f7f; }
+  .modal-body form {
+    width: 75%;
+    margin: auto; }
+  .modal-body a {
+    color: #35647e;
+    text-decoration: underline; }
+    .modal-body a:hover {
+      text-decoration: none; }
+  .modal-body .btn-default {
+    width: 70%; }
+
+@media (max-width: 480px) {
+  .modal-body form {
+    width: 95%;
+    margin: auto; } }
+header {
+  height: 68px; }
+
+.main-nav {
+  color: #fff;
+  background-color: #35647e;
+  font-size: 0.9em;
+  height: 68px; }
+  .main-nav .search-box {
+    display: flex;
+    position: relative;
+    justify-content: start;
+    align-self: center; }
+    .main-nav .search-box .form-control {
+      padding: 0.2rem 0.75rem; }
+    .main-nav .search-box .btn-search {
+      position: absolute;
+      right: 5px;
+      top: 0px;
+      color: #35647e;
+      padding: 0.2em 0.75rem; }
+  .main-nav .navbar-nav {
+    margin: 0; }
+    .main-nav .navbar-nav .nav-item {
+      padding-top: var(--bs-nav-link-padding-y);
+      padding-bottom: var(--bs-nav-link-padding-y); }
+    .main-nav .navbar-nav .nav-link {
+      color: #35647e; }
+    .main-nav .navbar-nav .nav-link.active,
+    .main-nav .navbar-nav .nav-link.show {
+      color: #fff; }
+      .main-nav .navbar-nav .nav-link.active:hover,
+      .main-nav .navbar-nav .nav-link.show:hover {
+        opacity: .8; }
+    .main-nav .navbar-nav .btn-signUp {
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+      background-color: #fff;
+      box-shadow: 0px 2px 4px 0px #0000008c; }
+      .main-nav .navbar-nav .btn-signUp:hover {
+        box-shadow: none; }
+    .main-nav .navbar-nav .dropdown {
+      padding-top: 0;
+      padding-bottom: 0; }
+    .main-nav .navbar-nav .dropdown-toggle {
+      color: #fff; }
+      .main-nav .navbar-nav .dropdown-toggle::after {
+        font-size: 1.2em; }
+    .main-nav .navbar-nav .dropdown-item {
+      font-size: 0.85em;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; }
+      .main-nav .navbar-nav .dropdown-item:hover {
+        color: #fff;
+        background-color: #8DAFC2; }
+    .main-nav .navbar-nav .user-icon {
+      display: inline-block;
+      background-color: #fff;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      border-radius: 50%; }
+      .main-nav .navbar-nav .user-icon .fa-user {
+        color: #35647e;
+        font-size: 1.2em; }
+  .main-nav .navbar-toggler {
+    color: #8DAFC2;
+    border-color: #8DAFC2; }
+  .main-nav .offcanvas {
+    width: 300px;
+    color: #fff;
+    background-color: #363636; }
+    .main-nav .offcanvas .btn-close-custom {
+      background: none;
+      font-size: 1.8em;
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0; }
+
+@media (min-width: 576px) {
+  .offcanvas .fa-right-to-bracket,
+  .offcanvas .fa-registered,
+  .offcanvas .accountManagement-text {
+    display: none; } }
+@media (max-width: 576px) {
+  .main-nav .search-box input {
+    background-color: #454545;
+    color: #fff; }
+  .main-nav .search-box .btn-search {
+    color: #fff; }
+  .main-nav .navbar-nav .nav-item {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0; }
+    .main-nav .navbar-nav .nav-item:first-child {
+      padding-top: 1em; }
+    .main-nav .navbar-nav .nav-item .nav-link {
+      width: 100%;
+      font-size: 1em;
+      text-align: left; }
+      .main-nav .navbar-nav .nav-item .nav-link svg {
+        margin-right: 0.5em; }
+      .main-nav .navbar-nav .nav-item .nav-link.btn-signUp {
+        background-color: transparent;
+        color: #fff;
+        box-shadow: none; }
+  .main-nav .navbar-nav .user-icon {
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    line-height: inherit; }
+    .main-nav .navbar-nav .user-icon .fa-user {
+      color: #fff; } }
+footer {
+  background-color: #DFE4E6;
+  min-height: 250px; }
+
+.footer-wrap {
+  padding: 3em; }
+  .footer-wrap ul {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    .footer-wrap ul li {
+      margin: 1em 0; }
+      .footer-wrap ul li a {
+        color: #8b8b8b; }
+        .footer-wrap ul li a:hover {
+          opacity: .8; }
+  .footer-wrap .title {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    color: #1E252B; }
+  .footer-wrap .social-link a {
+    font-size: 1em; }
+
+@media (min-width: 576px) {
+  .footer-wrap {
+    padding: 3em 5em; }
+
+  .logo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center; } }
+.topic-nav-wrap {
+  padding: 1em 0; }
+  .topic-nav-wrap .topic-tag {
+    height: 30px;
+    width: auto;
+    border-radius: 5px;
+    background-color: #eee; }
+    .topic-nav-wrap .topic-tag h1 {
+      font-size: 0.8em; }
+  .topic-nav-wrap .tag-active .topic-tag {
+    background-color: #8DAFC2; }
+    .topic-nav-wrap .tag-active .topic-tag h1 {
+      color: #fff; }
+
+@media (min-width: 576px) {
+  .topic-nav-wrap .uk-slider-items {
+    flex-direction: column; }
+    .topic-nav-wrap .uk-slider-items > li {
+      padding-left: 0;
+      padding-top: 15px; }
+  .topic-nav-wrap .slidenav-icon {
+    display: none; } }
+.main-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .main-card ul li {
+    margin: 1.5em 0;
+    position: relative;
+    display: flex;
+    align-items: start; }
+    .main-card ul li .topic-tag-icon {
+      display: inline-block;
+      color: #fff;
+      width: 70px;
+      padding: 0.5em 1em;
+      box-shadow: 2px 2px 2px 2px #ddd;
+      margin-top: 10px;
+      margin-right: -10px;
+      transform: rotate(1deg);
+      position: relative;
+      z-index: 0;
+      font-size: 0.9em; }
+  .main-card ul .card-content {
+    width: 80%;
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #ddd;
+    position: relative;
+    z-index: 1;
+    transition: all .15s ease-in-out; }
+    .main-card ul .card-content a {
+      text-decoration: none; }
+    .main-card ul .card-content .title {
+      font-size: 1.3em;
+      margin-bottom: 0.5em;
+      color: #242A30; }
+    .main-card ul .card-content .intro-content {
+      color: #666;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5em;
+      margin-bottom: 0.5em; }
+    .main-card ul .card-content .dateTime-content, .main-card ul .card-content .location-content {
+      color: #35647e;
+      margin: 1em 0 0; }
+    .main-card ul .card-content:hover {
+      box-shadow: none; }
+
+/*# sourceMappingURL=main.css.map */

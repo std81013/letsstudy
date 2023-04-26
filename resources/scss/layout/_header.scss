@@ -1,0 +1,159 @@
+
+header {
+    height: 68px;
+}
+.main-nav {
+    color: $light-text-color;
+    background-color: $main-bg-color;
+    font-size: 0.9em;
+    height: 68px;
+    .search-box {
+        display: flex;
+        position: relative;
+        justify-content: start;
+        align-self: center;
+        .form-control {
+            padding: 0.2rem 0.75rem;
+        }
+        .btn-search {
+            position: absolute;
+            right: 5px;
+            top: 0px;
+            color: $main-bg-color;
+            padding: 0.2em 0.75rem;
+        }
+    }
+    .navbar-nav {
+        margin: 0;
+        .nav-item {
+            padding-top: var(--bs-nav-link-padding-y);
+            padding-bottom: var(--bs-nav-link-padding-y);
+        }
+        .nav-link {
+            color: $main-bg-color;
+        }        
+        .nav-link.active, 
+        .nav-link.show {
+            color: $light-text-color;
+            &:hover {
+                opacity: .8;
+            }        
+        } 
+        .btn-signUp {
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            background-color: $light-text-color;
+            box-shadow: 0px 2px 4px 0px #0000008c;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        .dropdown {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .dropdown-toggle {
+            color: #fff;
+            &::after {
+                font-size: 1.2em;
+            }
+        } 
+        .dropdown-item {
+            font-size: 0.85em;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+            &:hover {
+                color: $light-text-color;
+                background-color: $link-hover-color;
+            }
+        }  
+        .user-icon {
+            display: inline-block;
+            background-color: $light-text-color;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 50%;
+            .fa-user {
+                color: $main-bg-color;
+                font-size: 1.2em;
+            }
+        }                             
+    }   
+
+    //手機版 nav    
+    .navbar-toggler {
+        color: $link-hover-color;
+        border-color: $link-hover-color;
+    }
+    .offcanvas {
+        width: $offcanvas-horizontal-width;
+        color: $light-text-color;
+        background-color: #363636;
+        .btn-close-custom {
+            background: none;
+            font-size: 1.8em;
+            width: auto;
+            height: auto;
+            padding: 0;
+            margin: 0;
+          }
+    }
+    
+}
+@media (min-width: 576px) {
+    .offcanvas {
+        .fa-right-to-bracket, 
+        .fa-registered, 
+        .accountManagement-text {
+            display: none;
+        }
+    }
+}
+@media (max-width: 576px) {
+    .main-nav {
+        .search-box {
+            input {
+                background-color: #454545;
+                color: $light-text-color;
+            }
+            .btn-search {
+                color: $light-text-color;
+            }
+        }
+        
+        .navbar-nav {
+            .nav-item {
+            width: 100%;
+            padding-top: 0;
+            padding-bottom: 0;
+                &:first-child {
+                    padding-top: 1em;
+                }
+                .nav-link {
+                    width: 100%;
+                    font-size: 1em;
+                    text-align: left;
+                    svg {
+                        margin-right: 0.5em;
+                    }
+                    &.btn-signUp {
+                        background-color: transparent;
+                        color: $light-text-color;
+                        box-shadow: none;
+                    }
+                }            
+            }
+            .user-icon {
+                width: auto;
+                height: auto;
+                background-color: transparent;
+                line-height: inherit;
+                .fa-user {
+                    color: $light-text-color;
+                }
+            }
+        }
+
+    }
+}

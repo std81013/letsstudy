@@ -1,0 +1,87 @@
+@import 'font.scss';
+html, body {
+    height: 100%;
+    background-color: #F7F8F7;
+}
+body {
+    font: 14px "Nunito", "Noto Sans TC",  蘋果儷中黑, 微軟雅黑體, "sans-serif", "小塚ゴシック Pro", ヒラギノ角ゴ;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+}
+
+a {
+    transition: all .15s ease-in-out;
+    &:hover {
+        text-decoration: none;
+    }
+}
+.text-bg-color {
+    color: $main-bg-color;
+}
+
+//button
+.btn-default {
+    background-color: $main-bg-color;
+    color: $light-text-color;
+    font-size: 1em;
+    padding: 0.7em;
+    min-width: 200px;
+    &:hover {
+        background-color: $link-hover-color;
+        color: $light-text-color;
+    }
+}
+
+//主要框框
+.main-wrap {
+    min-height: 600px;
+    padding-top: 2em;
+    padding-bottom: 2.5em;
+    // height: calc(100% - 310px);
+    a {
+        color: $main-bg-color;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .main-title {
+        text-align: center;
+        font-size: 1.5em;
+        padding: 1em 0 1.5em;
+        margin-bottom: 1.5em;
+        border-bottom: 1px solid $dark-text-color;
+    }
+}
+
+
+//小框框 - 使用在註冊，忘記密碼，系統信的通知頁面，少資料頁面
+.sm-wrap {
+    max-width: 550px;
+    width: 100%;
+    margin: 1em auto;
+}
+
+
+//tag color
+.tag-skill {
+    background-color: #6ba1cb;
+}
+.tag-sport {
+    background-color: #e3a954;
+}
+.tag-entertainment {
+    background-color: #b193b6;
+}
+.tag-art {
+    background-color: #DEA4A4;
+}
+.tag-language {
+    background-color: #97A884;
+}
+.tag-book {
+    background-color: #836565;
+}
+.tab-other {
+    background-color: #7cb4af;
+}

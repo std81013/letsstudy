@@ -1,0 +1,35 @@
+.modal-header {
+    border-bottom: 0;
+    background-color: $main-bg-color;
+    color: $light-text-color;
+    .modal-title {
+        margin: auto;
+        color: $light-text-color;
+    }
+}
+.modal-body {
+    background-color: $footer-bg-color;
+    color: #7f7f7f;
+    form {
+        width: 75%;
+        margin: auto;
+    }
+    a {
+        color: $main-bg-color;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .btn-default {
+        width: 70%;
+    }
+}
+@media (max-width: 480px) {
+    .modal-body {
+        form {
+            width: 95%;
+            margin: auto;
+        }
+    }
+}
