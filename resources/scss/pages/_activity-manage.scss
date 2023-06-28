@@ -1,0 +1,189 @@
+// "am-" 為 activity-manage 前綴詞 
+.am-wrap {
+    max-width: 800px;
+    margin: auto;
+}
+.filepond--credits {
+    display: none;
+}
+.uploadImg-wrap {
+    border: 1px dashed $main-color;
+    border-radius: 1em;
+    padding: 1em;
+    position: relative;
+    height: 220px;
+
+    .filepond--root {
+        height: 100%;
+    }
+    .filepond--panel-root {
+        background-color: transparent;
+    }
+
+    .uploadImg-text {
+        position: absolute;
+        // z-index: 1;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: auto;
+        padding-top: 4em;
+        color: $main-color;
+        line-height: 2em;
+        .fa-camera {
+            font-size: 3.5em;
+        }
+    }
+}
+.personal-img {
+    height: 180px;
+    border-radius: 50%;
+    .uploadImg-text {
+        padding-top: 2.5em;
+    }
+    .filepond--drop-label.filepond--drop-label label {
+        color: transparent;
+        min-height: 8.75em;
+        margin-top: 3em;
+        .filepond--label-action {
+            text-decoration: none;
+        }
+    }
+}
+.myAm-box {
+    margin: 0;
+    align-items: start;
+}
+.am-nav {
+    background-color: #eee;
+    border-radius: $border-radius;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    .nav-link {
+        color: $main-color;
+        .fa-caret-right {
+            margin-right: 0.5em;
+            color: transparent;
+        }
+        &.active {
+            color: $dark-text-color;
+            background-color: transparent;
+            cursor: default;
+            .fa-caret-right {
+                color: $dark-text-color;
+            }
+        }
+    }
+}
+.am-container {
+    margin-top: 2em;
+    .nav {
+        border-bottom: 1px solid $border-bottom-color;
+        .nav-item {
+            width: 20%;
+        }
+        .nav-link {
+            width: 100%;
+            color: $main-color;
+            &.active {
+                font-weight: normal;
+                color: $dark-text-color;
+                border-bottom-color: $main-color;
+            }
+        }
+    }
+    .main-card {
+        li {
+            justify-content: center;
+        }
+    }
+
+}
+.am-content {
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-card;
+    background-color: $light-text-color;
+    .am-title {
+        display: flex;
+        align-items: center;
+        padding: 0.3em;
+        font-size: 1.1em;
+        background-color: $main-color-light;
+        color: $light-text-color;
+        border-top-right-radius: $border-radius;
+        border-top-left-radius: $border-radius;
+        .btn {
+            color: $light-text-color;
+        }
+    }
+    .am-info {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 1em;
+        & > div {
+            display: flex;
+        }
+        label {
+            margin-right: 0.5em;
+            font-weight: bold;
+        }
+        .date-info, .peopleNumber-info {
+            color: $main-color;
+        }
+        .joined-number {
+            font-size: 1.2em;
+            color: $dark-text-color;
+            margin-right: 2px;
+        }
+    }
+    .fa-address-book {
+        color: #FFEB3B;
+        font-size: 1.2rem;
+    }
+}
+
+.memberInfo-wrap {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .member-avatar {
+        text-align: center;
+        font-size: 16px;
+        .member-name {
+            margin: 1rem 0;
+        }
+    }
+    .memberInfo-txt {
+        margin: 0.5rem 0 1.5rem;
+        color: $ad-text-color;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .am-nav {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .am-container {
+        padding-left: 3em;
+        padding-right: 0;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .personal-img {
+        height: 110px;
+        border-radius: 4px;
+        .uploadImg-text {
+            padding-top: 0;
+        }
+        .filepond--drop-label.filepond--drop-label label {
+            min-height: 6.75em;
+            margin-top: 0;
+        }
+    }
+}

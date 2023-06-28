@@ -1,0 +1,93 @@
+// "ad-" 為 activity-detail 前綴詞 
+.activity-detail-wrap {
+    max-width: 1140px;
+    margin: auto;
+    .ad-main-img {
+        width: 100%;
+        height: 450px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .topic-tag {
+        display: inline-block;
+        text-align: center;
+        color: $light-text-color;
+        border-radius: 2px;
+        min-width: 70px;
+        padding: 0.3em 1em;
+    }
+    .title {
+        font-size: 1.5em;
+        margin: 1em 0;
+    }
+    .ad-box {
+        margin: 1em 0;
+    }
+    .ad-title {
+        font-size: 1.3em;
+        border-bottom: 1px solid #D7D7D7;
+        padding-bottom: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 1.8em;
+    }
+    .ad-info {
+        color: $ad-text-color;
+        margin-bottom: 1.5em;
+        .notice-tip {
+            font-size: 1.3em;
+        }
+    }
+    .mailInfo-btn {
+        color: #8B572A;
+        border-color: transparent;
+        &:active {
+            border-color: transparent;
+        }
+    }
+    .deadline-box {
+        border-top: 1px solid #D7D7D7;
+        padding-top: 1em;
+        margin: 1em 0;
+        display: flex;
+    }
+    .join-btn {
+        text-align: center;
+        .btn-default {
+            width: 90%;
+        }
+    }
+    
+    .ad-sub-title {
+        font-weight: bold;
+        margin-right: 1em;
+    }
+    .ad-sub-info {
+        color: $main-color;
+    }
+    .ad-box-info {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 1em;
+        .ad-sub-title {
+            width: 4.5em;
+        }
+    }
+
+    .join-member-list {    
+        display: flex;
+        flex-wrap: wrap;
+        a {
+            text-decoration: none;
+            &:hover {
+                opacity: .8;
+            }
+        }
+        .join-member {
+            width: 50px;
+            text-align: center;
+            margin: 0.5em 0.735em;
+        }
+    }
+}

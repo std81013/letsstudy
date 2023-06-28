@@ -1,6 +1,6 @@
 .modal-header {
     border-bottom: 0;
-    background-color: $main-bg-color;
+    background-color: $main-color;
     color: $light-text-color;
     .modal-title {
         margin: auto;
@@ -15,7 +15,7 @@
         margin: auto;
     }
     a {
-        color: $main-bg-color;
+        color: $main-color;
         text-decoration: underline;
         &:hover {
             text-decoration: none;

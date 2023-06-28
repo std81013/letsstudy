@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\UserRepository;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -33,9 +35,10 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): View
     {
         $this->userRepository->createUser($request->input('email'), $request->input('password'), $request->input('nickname'));
-        return redirect('/');
+        Mail::to('s0952785388@gmail.com')->send(new OrderShipped());
+        return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful']);
     }
 }

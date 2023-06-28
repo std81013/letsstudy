@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Mail\OrderShipped;
 
 /*
@@ -22,10 +23,13 @@ Route::get('/', function () {
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register']);
-Route::post('/store', [AuthController::class, 'store']);
+Route::post('/user/store', [AuthController::class, 'store']);
 
-//註冊mail信
-//db script
+Route::get('/event/list', [EventController::class, 'list']);
+Route::get('/event/view/{id}', [EventController::class, 'view']);
+Route::get('/event/join/{id}', [EventController::class, 'join']);
+Route::post('/event/join', [EventController::class, 'joinEvent']);
+Route::get('/event/add', [EventController::class, 'manage']);
 
 Route::get('/mail', function () {
     Mail::to('s0952785388@gmail.com')->send(new OrderShipped());

@@ -13,7 +13,7 @@
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-sm fixed-top main-nav">
                 <div class="container-xxl">
-                    <a class="navbar-brand" href="index.html">      
+                    <a class="navbar-brand" href="/">      
                         <img src="/img/logo.png" alt="" width="100" >
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -177,7 +177,7 @@
                     <li data-topic-tag="book">
                         <div class="topic-tag-icon tag-book">書籍</div>
                         <div class="card-content">
-                            <a href="">
+                            <a href="/event/view/1">
                                 <div class="title">《深度學習的技術》讀書會</div>
                                 <div class="intro-content">我們讀書會已成立一年囉，運作良好，成員們也都很好相處，這是去年 2017 Reading…</div>
                                 <div class="dateTime-content"><i class="fa-solid fa-calendar-days"></i> 2021/04/30(五) 19:30 </div>
@@ -241,7 +241,7 @@
                         </div>
                         <div class="mb-3 ">
                             <label for="passwordInput" class="form-label">請輸入您的密碼</label>
-                            <input type="password" name="password" class="form-control" id="passwordInput" autocomplete="current-password" placeholder="" required>
+                            <input type="password" name="password" class="form-control" id="passwordInput" autocomplete="current-password" placeholder="" required value="">
                         </div>
                         <div class="text-center mb-3">
                             <button type="submit" class="btn btn-default">登入</button>
@@ -286,4 +286,10 @@
         </div>
     </div>
 </body>
+<script>
+    @if (isset($showMessage) && $showMessage === 'store_successful')
+        alert('請至註冊的信箱收信，預計5-10分鐘內會收到');
+    @endif
+
+</script>
 </html>

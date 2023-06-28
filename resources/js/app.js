@@ -9,3 +9,11 @@ import 'uikit/dist/css/uikit.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import CryptoJS from 'crypto-js';
+
+import 'jquery-validation';
+
+// import 'flatpickr';
+// //import 'flatpickr/dist/flatpickr.min.css';
+
+// import 'jquery-filepond/filepond.jquery';
+// import {FilePond} from 'filepond';

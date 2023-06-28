@@ -4,7 +4,7 @@ header {
 }
 .main-nav {
     color: $light-text-color;
-    background-color: $main-bg-color;
+    background-color: $main-color;
     font-size: 0.9em;
     height: 68px;
     .search-box {
@@ -19,7 +19,7 @@ header {
             position: absolute;
             right: 5px;
             top: 0px;
-            color: $main-bg-color;
+            color: $main-color;
             padding: 0.2em 0.75rem;
         }
     }
@@ -30,7 +30,7 @@ header {
             padding-bottom: var(--bs-nav-link-padding-y);
         }
         .nav-link {
-            color: $main-bg-color;
+            color: $main-color;
         }        
         .nav-link.active, 
         .nav-link.show {
@@ -75,7 +75,7 @@ header {
             text-align: center;
             border-radius: 50%;
             .fa-user {
-                color: $main-bg-color;
+                color: $main-color;
                 font-size: 1.2em;
             }
         }                             

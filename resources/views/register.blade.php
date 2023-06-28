@@ -48,7 +48,7 @@
     <div class="container-xxl main-wrap">
         <div class="sm-wrap pb-5">
             <div class="main-title">註冊</div>
-            <form method="POST" action="/store" >
+            <form method="POST" action="/user/store" >
                 @csrf
                 <div class="mb-3">
                     <label for="signUpEmailInput" class="form-label">註冊信箱</label>
