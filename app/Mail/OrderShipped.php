@@ -13,12 +13,14 @@ class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $url;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(string $url)
     {
-        //
+        $this->url = $url;
     }
 
     /**
@@ -37,7 +39,10 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'resetPassword',
+            view: 'registerVerificationLetter',
+            with: [
+                'url' => $this->url,
+            ],
         );
     }
 

@@ -3,13 +3,13 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Log;
-use App\Models\Event;
+use App\Models\EventType;
 
-class EventRepository
+class EventTypeRepository
 {
-    public function getById(int $id)
+    public function getList()
     {
-        return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.id', $id)->get()->first();
+        return EventType::all();
     }
 
     public function getByParticipant(int $userId)
@@ -20,10 +20,5 @@ class EventRepository
     public function getByCreatedBy(int $userId)
     {
         return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
-    }
-
-    public function getList()
-    {
-        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->get();
     }
 }

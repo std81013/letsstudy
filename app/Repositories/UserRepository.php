@@ -7,19 +7,40 @@ use App\Models\User;
 
 class UserRepository
 {
-    public function createUser(string $email, string $password, string $nickname)
+    public function createUser(string $email, string $password, string $nickname, string $registerDatetime, string $token)
     {
         $user = new User;
         $user->email = $email;
         $user->password = $password;
         $user->nickname = $nickname;
-        $user->register_date = date('Y-m-d H:i:s');
-        $user->session_key = md5($user->register_date);
+        $user->register_datetime = $registerDatetime;
+        $user->session_key = $token;
         $user->save();
+        return $user->id;
     }
 
     public function validateUser(string $email, string $password)
     {
         return User::where('email', $email)->where('password', $password)->exists();
+    }
+
+    public function getByToken(string $token)
+    {
+        return User::where('token', $token)->get()->first();
+    }
+
+    public function updateIsVerify(string $id, int $isVerify)
+    {
+        return User::where('id', $id)->update(['is_verify' => $isVerify]);
+    }
+
+    public function getById(string $id) 
+    {
+        return User::where('id', $id)->get()->first();
+    }
+
+    public function getByEmail(string $email) 
+    {
+        return User::where('email', $email)->get()->first();
     }
 }

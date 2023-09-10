@@ -16,14 +16,14 @@ use App\Mail\OrderShipped;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [EventController::class, 'dashboard']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/user/store', [AuthController::class, 'store']);
+Route::get('/register/successfully/{token}', [AuthController::class, 'registerSuccess']);
+Route::post('/send/forgetMail', [AuthController::class, 'sendForgetMail']);
 
 Route::get('/event/list', [EventController::class, 'list']);
 Route::get('/event/view/{id}', [EventController::class, 'view']);

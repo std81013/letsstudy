@@ -5,14 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Repositories\EventRepository;
+use App\Repositories\EventTypeRepository;
 use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
     private $eventRepository;
-    public function __construct(EventRepository $eventRepository)
+    private $eventTypeRepository;
+    public function __construct(EventRepository $eventRepository, EventTypeRepository $eventTypeRepository)
     {
         $this->eventRepository = $eventRepository;
+        $this->eventTypeRepository = $eventTypeRepository;
+    }
+
+    public function dashboard(): View
+    {
+        return view('dashboard', ['eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
     public function list(): View

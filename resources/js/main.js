@@ -19,4 +19,20 @@ $('li[data-topic-filter=""]').on("click",function() {
     $('.main-card li' + topicTag).show();
   });
 
+  $('#resetPwBtn').on('click', function () {
+    $.ajax({
+      method: 'POST',
+      data: {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        email: $('#forgetPwEmailInput').val()
+      },
+      url: '/send/forgetMail',
+    }).done(function( success ) {
+      if ( success ) {
+        alert('郵件已寄出');
+      } else {
+        alert('寄信失敗');
+      }
+    });
+  });
 });

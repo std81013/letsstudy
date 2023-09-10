@@ -1,0 +1,1 @@
+<a class="nav-link btn btn-light btn-sm btn-signUp" href="{{ $url }}">開始使用</a>
