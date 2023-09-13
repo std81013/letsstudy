@@ -1,5 +1,5 @@
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+import jQuery from 'jquery';
+window.$ = jQuery;
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -12,8 +12,11 @@ import CryptoJS from 'crypto-js';
 
 import 'jquery-validation';
 
-// import 'flatpickr';
-// //import 'flatpickr/dist/flatpickr.min.css';
+import flatpckr from 'flatpickr';
+window.flatpckr = flatpckr;
+import 'flatpickr/dist/themes/dark.css';
 
+// import * as FilePond from 'filepond';
+// window.FilePond = FilePond;
+// import "filepond/dist/filepond.min.css";
 // import 'jquery-filepond/filepond.jquery';
-// import {FilePond} from 'filepond';

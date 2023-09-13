@@ -25,6 +25,11 @@
         width: 70%;
     }
 }
+.joined-list {
+    .modal-body {
+        background-color: #fff;
+    }
+}
 @media (max-width: 480px) {
     .modal-body {
         form {

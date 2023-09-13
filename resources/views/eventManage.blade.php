@@ -6,7 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/css/main.css', 'resources/js/form-validate.js', 'resources/js/datepicker.js', 'resources/js/fileupload.js'])
+    
+    <!-- include FilePond library -->
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/css/main.css', 'resources/js/datepicker.js'])
+    
+    <!-- Quill v1.0.0 -->
+	<script src="//cdn.quilljs.com/1.0.0/quill.js"></script>
+	<script src="//cdn.quilljs.com/1.0.0/quill.min.js"></script>
+	<link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+	<link href="//cdn.quilljs.com/1.0.0/quill.bubble.css" rel="stylesheet">
+
+    <script type="module">
+        $(document).ready(function() {
+            $('.filepond').filepond();
+        });
+
+        var quill = new Quill( "#editor", {
+        theme: "snow", // 模板
+        modules: {
+            toolbar: [
+                // 工具列列表[註1]
+                ['bold', 'italic', 'underline', 'strike'], // 粗體、斜體、底線和刪節線
+                ['blockquote', 'code-block'], // 區塊、程式區塊
+                [{ 'header': 1 }, { 'header': 2 }], // 標題1、標題2
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }], // 清單
+                [{ 'script': 'sub'}, { 'script': 'super' }], // 上標、下標
+                [{ 'indent': '-1'}, { 'indent': '+1' }], // 縮排
+                [{ 'direction': 'rtl' }], // 文字方向
+                [{ 'size': ['small', false, 'large', 'huge'] }], // 文字大小
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],// 標題
+                [{ 'color': [] }, { 'background': [] }], // 顏色
+                [{ 'font': [] }], // 字體
+                [{ 'align': [] }], // 文字方向
+                [ 'clean' ] // 清除文字格是
+            ]
+        }
+    });
+
+    </script>
+
     <title>Let's Study</title>
 </head>
 <body>
@@ -67,7 +106,7 @@
                     <div class="col-sm-10">
                         <label for="amDateInput" class="form-label">活動時間</label>
                         <div>
-                            <input type="text" name="" id="amDateInput" class="form-control anotherSelector" required>
+                            <input type="text" name="" id="activityDateInput" class="form-control" required>
                             <div id="" class="form-text">
                                 說明：可設定單日的日期時間或是有範圍的日期時間
                             </div>
@@ -98,7 +137,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="amDetailsTextarea" class="form-label">活動詳細內容</label>
-                    <textarea name="" id="amDetailsTextarea" cols="30" rows="10" class="form-control" required></textarea>
+                    <div id="editor"  class="am-editor-box">
+                    </div>
                     <div id="" class="form-text">說明：輸入詳細的活動資訊，讓更多人清楚知道活動內容。</div>
                 </div>
                 <div class="mb-3">

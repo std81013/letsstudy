@@ -43,7 +43,9 @@ ul {
     padding: 0.7em;
     min-width: 200px;
 }
-
+.btn.disabled {
+    color: #666666 !important;
+}
 //主要框框
 .main-wrap {
     min-height: 600px;

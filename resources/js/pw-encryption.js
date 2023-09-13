@@ -1,4 +1,3 @@
-
 // 获取按钮元素并添加点击事件
 const loginBtn = document.querySelector('button[type="submit"]');
 loginBtn.addEventListener('click', function (event) {
@@ -16,3 +15,5 @@ loginBtn.addEventListener('click', function (event) {
 
   // TODO: 将加密后的密码发送给后端
 });
+
+

@@ -139,7 +139,7 @@
         }
     }
     .fa-address-book {
-        color: #FFEB3B;
+        color: #c6e8ff;
         font-size: 1.2rem;
     }
 }
@@ -161,6 +161,14 @@
     }
 }
 
+.am-editor-box {
+    min-height: 10rem;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
 
 @media (min-width: 768px) {
     .am-nav {
