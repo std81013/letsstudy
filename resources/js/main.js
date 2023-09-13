@@ -23,7 +23,7 @@ $('li[data-topic-filter=""]').on("click",function() {
     $.ajax({
       method: 'POST',
       data: {
-        _token: $('meta[name="csrf-token"]').attr('content'),
+        _token: $('#csrf-token').val(),
         email: $('#forgetPwEmailInput').val()
       },
       url: '/send/forgetMail',

@@ -2,16 +2,25 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
 
-class Authenticate extends Middleware
+class Authenticate
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     */
-    protected function redirectTo(Request $request): ?string
+    private $userRepository;
+    public function __construct(UserRepository $userRepository)
     {
-        return $request->expectsJson() ? null : route('login');
+        $this->userRepository = $userRepository;
+    }
+
+    public function handle($request, Closure $next, ...$guards)
+    {
+        $token = $request->session()->get('token');
+        if (!is_null($token) && $this->userRepository->validateToken($token)) {
+            return $next($request);
+        } else {
+            abort(403);
+        }
     }
 }

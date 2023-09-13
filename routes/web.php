@@ -21,15 +21,23 @@ Route::get('/', [EventController::class, 'dashboard']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register']);
-Route::post('/user/store', [AuthController::class, 'store']);
-Route::get('/register/successfully/{token}', [AuthController::class, 'registerSuccess']);
+
+Route::get('/event/view/{id}', [EventController::class, 'view']);
+
 Route::post('/send/forgetMail', [AuthController::class, 'sendForgetMail']);
 
-Route::get('/event/list', [EventController::class, 'list']);
-Route::get('/event/view/{id}', [EventController::class, 'view']);
-Route::get('/event/join/{id}', [EventController::class, 'join']);
-Route::post('/event/join', [EventController::class, 'joinEvent']);
-Route::get('/event/add', [EventController::class, 'manage']);
+Route::get('/user/resetPassword', [AuthController::class, 'resetPassword']);
+Route::post('/user/updatePassword', [AuthController::class, 'updatePassword']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/user/store', [AuthController::class, 'store']);
+    Route::get('/register/successfully/{token}', [AuthController::class, 'registerSuccess']);
+
+    Route::get('/event/list', [EventController::class, 'list']);
+    Route::get('/event/join/{id}', [EventController::class, 'join']);
+    Route::post('/event/join', [EventController::class, 'joinEvent']);
+    Route::get('/event/add', [EventController::class, 'manage']);
+});
 
 Route::get('/mail', function () {
     Mail::to('s0952785388@gmail.com')->send(new OrderShipped());

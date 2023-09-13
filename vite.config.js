@@ -4,7 +4,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/datepicker.js'],
             refresh: true,
         }),
     ],
@@ -12,8 +12,5 @@ export default defineConfig({
         alias: {
             '$': 'jQuery'
         },
-    },
-    optimizeDeps: {
-        include: ['jquery', 'uikit', '@fortawesome/fontawesome-free', 'bootstrap', 'crypto-js', 'jquery-validation', 'flatpickr', 'quill']
     }
 });

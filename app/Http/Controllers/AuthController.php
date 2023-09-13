@@ -12,6 +12,7 @@ use App\Repositories\EventRepository;
 use App\Repositories\EventTypeRepository;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -27,13 +28,20 @@ class AuthController extends Controller
 
     public function login(Request $request): View
     {
-        $auth = $this->userRepository->validateUser($request->input('email'), $request->input('password'));
-        return view('dashboard', ['auth' => $auth, 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
+        $token = null;
+        $isExist = $this->userRepository->validateUser($request->input('email'), $request->input('password'));
+        if ($isExist) {
+            $token = Str::uuid();
+            $request->session()->put('token', $token);
+            $this->userRepository->updateUserToken($request->input('email'), $request->input('password'), $token);
+        }
+        return view('dashboard', ['token' => $token, 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
     public function logout(Request $request): View
     {
-        return view('dashboard', ['auth' => false]);
+        $request->session()->forget('token');
+        return view('dashboard', ['token' => null, 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
     public function register(Request $request): View
@@ -52,7 +60,7 @@ class AuthController extends Controller
 
         //mail
         $token = encrypt(['id' => $id]);
-        Mail::to('s0952785388@gmail.com')->send(new OrderShipped(url("/register/successfully/$token")));
+        Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$token")));
         return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful']);
     }
 
@@ -76,9 +84,25 @@ class AuthController extends Controller
 
     public function sendForgetMail(Request $request): bool
     {
-        if (!is_null($this->userRepository->getByEmail($request->input('email')))) {
-            Mail::to('s0952785388@gmail.com')->send(new OrderShipped(url('/resetPassword')));//replace to $request->input('email')
+        $email = $request->input('email');
+        if (!is_null($this->userRepository->getByEmail($email))) {
+            Mail::to($email)->send(new OrderShipped(url("/user/resetPassword?email={$email}")));
         }
         return true;
+    }
+
+    public function resetPassword(Request $request): View
+    {
+        return view('resetPassword', ['email' => $request->input('email')]);
+    }
+
+    public function updatePassword(Request $request): bool
+    {
+        $is_updated = false;
+        $email = $request->input('email');
+        if (!is_null($this->userRepository->getByEmail($email))) {
+            $is_updated = $this->userRepository->updatePassword($email, $request->input('password'));
+        }
+        return $is_updated;
     }
 }

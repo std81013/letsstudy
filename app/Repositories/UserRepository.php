@@ -14,7 +14,7 @@ class UserRepository
         $user->password = $password;
         $user->nickname = $nickname;
         $user->register_datetime = $registerDatetime;
-        $user->session_key = $token;
+        $user->token = $token;
         $user->save();
         return $user->id;
     }
@@ -24,9 +24,14 @@ class UserRepository
         return User::where('email', $email)->where('password', $password)->exists();
     }
 
-    public function getByToken(string $token)
+    public function updateUserToken(string $email, string $password, string $token)
     {
-        return User::where('token', $token)->get()->first();
+        return User::where('email', $email)->where('password', $password)->update(['token' => $token]);
+    }
+
+    public function validateToken(string $token)
+    {
+        return User::where('token', $token)->exists();
     }
 
     public function updateIsVerify(string $id, int $isVerify)
@@ -42,5 +47,10 @@ class UserRepository
     public function getByEmail(string $email) 
     {
         return User::where('email', $email)->get()->first();
+    }
+
+    public function updatePassword(string $email, string $password)
+    {
+        return User::where('email', $email)->update(['password' => $password]);
     }
 }

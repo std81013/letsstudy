@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/css/main.css'])
+    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js'])
     <title>Let's Study</title>
 </head>
 <body>
@@ -53,39 +53,6 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="container-xxl">
-            <div class="row footer-wrap">
-                <div class="col-6 col-sm-3 mb-3">
-                    <ul>
-                        <li><div class="title">關於</div></li>
-                        <li><a href="about.html">關於我們</a></li>
-                        <li><a href="service.html">服務條款</a></li>
-                        <li><a href="privacy.html">隱私權政策</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-sm-3 mb-3">
-                    <ul>
-                        <li><div class="title">幫助</div></li>
-                        <li><a href="useinfo.html">使用說明</a></li>
-                        <li><a href="qna.html">常見問題</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-sm-3 mb-3">
-                    <ul class="social-link">
-                        <li><div class="title">社群</div></li>
-                        <li><a href="">Facebook</a></li>
-                        <li><a href="">Instagram</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-sm-3 mb-3 logo-footer">
-                    <div class="">
-                        <img src="/img/dark-logo.png" alt="" width="100">
-                    </div>
-                </div>
-            </div>            
-        </div>
-    </footer>
 
     @include('footer')
 

@@ -5,17 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <!-- include FilePond library -->
-    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/css/main.css', 'resources/js/datepicker.js'])
-    
-    <!-- Quill v1.0.0 -->
-	<script src="//cdn.quilljs.com/1.0.0/quill.js"></script>
-	<script src="//cdn.quilljs.com/1.0.0/quill.min.js"></script>
-	<link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-	<link href="//cdn.quilljs.com/1.0.0/quill.bubble.css" rel="stylesheet">
+
+    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/js/datepicker.js'])
+
+    <script type="module" src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+    <script type="module" src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 
     <script type="module">
         $(document).ready(function() {

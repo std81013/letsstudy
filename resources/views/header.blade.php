@@ -30,7 +30,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            @if (isset($auth) && $auth)
+                            @if (!is_null(session('token')))
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-icon"><i class="fa-solid fa-user"></i></div> <span class="accountManagement-text">帳戶管理</span> 
@@ -56,4 +56,5 @@
             </div>
         </nav>            
     </div>
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
 </header>
