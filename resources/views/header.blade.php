@@ -56,5 +56,5 @@
             </div>
         </nav>            
     </div>
-    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+    <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
 </header>

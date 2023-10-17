@@ -19,6 +19,7 @@ class AuthController extends Controller
     private $userRepository;
     private $eventRepository;
     private $eventTypeRepository;
+    private $urlKey = 'letstudy';
     public function __construct(UserRepository $userRepository, EventRepository $eventRepository, EventTypeRepository $eventTypeRepository)
     {
         $this->userRepository = $userRepository;
@@ -86,7 +87,8 @@ class AuthController extends Controller
     {
         $email = $request->input('email');
         if (!is_null($this->userRepository->getByEmail($email))) {
-            Mail::to($email)->send(new OrderShipped(url("/user/resetPassword?email={$email}")));
+            $uri = encrypt(['email' => $email]);
+            Mail::to($email)->send(new OrderShipped(url("/user/resetPassword?email={$uri}")));
         }
         return true;
     }
@@ -99,7 +101,7 @@ class AuthController extends Controller
     public function updatePassword(Request $request): bool
     {
         $is_updated = false;
-        $email = $request->input('email');
+        $email = decrypt($request->input('email'));
         if (!is_null($this->userRepository->getByEmail($email))) {
             $is_updated = $this->userRepository->updatePassword($email, $request->input('password'));
         }

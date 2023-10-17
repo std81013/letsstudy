@@ -20,6 +20,8 @@
                         <li class="uk-width-1-4 uk-width-1-2@s"
                         @if (!is_null($eventType->type_name)) 
                             data-topic-filter="[data-topic-tag='{{ $eventType->type_name }}']"
+                        @else
+                            data-topic-filter=""
                         @endif
                         >
                             <a href="" class="{{ is_null($eventType->type_name) ? 'tag-active' : 'tag' }}">

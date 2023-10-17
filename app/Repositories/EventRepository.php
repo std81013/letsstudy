@@ -26,4 +26,31 @@ class EventRepository
     {
         return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->get();
     }
+
+    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '', string $description = '')
+    {
+        $event = new Event;
+        $event->title = $title;
+        $event->introduction = $introduction;
+        $event->description = $description;
+        $event->event_type_id = $eventTypeId;
+        $event->start_date = $startDate;
+        $event->end_date = $endDate;
+        $event->registration_date = $registrationDate;
+        $event->location = $location;
+        $event->contact_method = $contactMethod;
+        $event->participants_amount = $participantsAmount;
+        $event->participants = $participants;
+        $event->plan = $plan;
+        $event->detail = $detail;
+        $event->created_by = $userId;
+        $event->created_at = $datetime;
+        $event->updated_by = $userId;
+        $event->updated_at = $datetime;
+        $event->note = $note;
+        $event->is_post = $isPost;
+        $event->image_path = $imagePath;
+        $event->save();
+        return $event->id;
+    }
 }

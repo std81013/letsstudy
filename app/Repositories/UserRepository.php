@@ -53,4 +53,9 @@ class UserRepository
     {
         return User::where('email', $email)->update(['password' => $password]);
     }
+
+    public function getByToken(string $token) 
+    {
+        return User::where('token', $token)->get()->first();
+    }
 }
