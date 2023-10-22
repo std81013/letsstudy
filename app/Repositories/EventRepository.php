@@ -27,7 +27,7 @@ class EventRepository
         return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->get();
     }
 
-    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '', string $description = '')
+    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '[]', string $description = '')
     {
         $event = new Event;
         $event->title = $title;
@@ -43,6 +43,7 @@ class EventRepository
         $event->participants = $participants;
         $event->plan = $plan;
         $event->detail = $detail;
+        $event->delta_json = $deltaJson;
         $event->created_by = $userId;
         $event->created_at = $datetime;
         $event->updated_by = $userId;
@@ -52,5 +53,30 @@ class EventRepository
         $event->image_path = $imagePath;
         $event->save();
         return $event->id;
+    }
+
+    public function updateEvent(string $id, string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $description = '')
+    {
+        return Event::where('id', $id)
+            ->update([
+                'title' => $title,
+                'introduction' => $introduction,
+                'description' => $description,
+                'event_type_id' => $eventTypeId,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'registration_date' => $registrationDate,
+                'location' => $location,
+                'contact_method' => $contactMethod,
+                'participants_amount' => $participantsAmount,
+                'plan' => $plan,
+                'detail' => $detail,
+                'delta_json' => $deltaJson,
+                'updated_by' => $userId,
+                'updated_at' => $datetime,
+                'note' => $note,
+                'is_post' => $isPost,
+                'image_path' => $imagePath,
+            ]);
     }
 }

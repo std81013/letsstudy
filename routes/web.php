@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/event/join/{id}', [EventController::class, 'join']);
     Route::post('/event/join', [EventController::class, 'joinEvent']);
     Route::get('/event/add', [EventController::class, 'manage']);
+    Route::get('/event/edit/{id}', [EventController::class, 'manage']);
     Route::post('/event/store', [EventController::class, 'store']);
 });
 

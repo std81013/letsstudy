@@ -143,7 +143,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
                                             </div>
@@ -173,7 +173,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-address-book"></i></button>
                                             </div>
@@ -203,7 +203,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
                                                 <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
                                             </div>

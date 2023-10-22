@@ -21,4 +21,9 @@ class EventTypeRepository
     {
         return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
     }
+
+    public function getListWithoutAll()
+    {
+        return EventType::whereNotNull('type_name')->get();
+    }
 }

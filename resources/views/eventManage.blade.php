@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,34 +10,6 @@
     <script type="module" src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
     <script type="module" src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-
-    <script type="module">
-        $(document).ready(function() {
-            $('.filepond').filepond();
-        });
-
-        var quill = new Quill( "#editor", {
-            theme: "snow", // 模板
-            modules: {
-                toolbar: [
-                    // 工具列列表[註1]
-                    ['bold', 'italic', 'underline', 'strike'], // 粗體、斜體、底線和刪節線
-                    ['blockquote', 'code-block'], // 區塊、程式區塊
-                    [{ 'header': 1 }, { 'header': 2 }], // 標題1、標題2
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }], // 清單
-                    [{ 'script': 'sub'}, { 'script': 'super' }], // 上標、下標
-                    [{ 'indent': '-1'}, { 'indent': '+1' }], // 縮排
-                    [{ 'direction': 'rtl' }], // 文字方向
-                    [{ 'size': ['small', false, 'large', 'huge'] }], // 文字大小
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],// 標題
-                    [{ 'color': [] }, { 'background': [] }], // 顏色
-                    [{ 'font': [] }], // 字體
-                    [{ 'align': [] }], // 文字方向
-                    [ 'clean' ] // 清除文字格是
-                ]
-            }
-        });
-    </script>
 
     <title>Let's Study</title>
 </head>
@@ -57,7 +28,6 @@
                                 <div>上傳主要圖片</div>
                                 <div class="notice-tip">圖片尺寸至少 590px * 394px</div>                                
                             </div>
-                            <!-- <input class="form-control form-control-sm" id="formFileSm" type="file"> -->
                             <!--TODO: 上傳圖片預覽圖的效果 -->
                             <input type="file" 
                                     class="filepond"
@@ -75,14 +45,10 @@
                             <div class="col-6 col-sm-5">
                                 <label for="amTypeSelect" class="form-label">活動分類</label>
                                 <select class="form-select" id="amTypeSelect" name="amTypeSelect" required><!--改成db-->
-                                    <option value="1">專業技術</option>
-                                    <option value="2">運動</option>
-                                    <option value="3">藝文</option>
-                                    <option value="4">語言</option>
-                                    <option value="5">娛樂</option>
-                                    <option value="6">書籍</option>
-                                    <option value="7">其他</option>
-                                  </select>
+                                @foreach ($eventTypes as $eventType)
+                                    <option value="{{ $eventType->id }}">{{ $eventType->name }}</option>
+                                @endforeach
+                                </select>
                             </div>
                             <div class="col-6 col-sm-7">
                                 <label for="deadlineInput" class="form-label">報名截止日</label>
@@ -140,13 +106,26 @@
                     <div id="" class="form-text">說明：可輸入需要大家遵守或注意的事項。</div>
                 </div>
                 <div class="text-center mb-3">
-                    <input type="hidden" value="0" name="isSaveDraft" id="isSaveDraft">
-                    <input type="hidden" value="{{ $id ?? '' }}" name="id" id="id">
+                    <input type="hidden" value="0" name="isPost" id="isPost">
+                    <input type="hidden" value="{{ $event->id ?? '' }}" name="id" id="id">
                     <button type="submit" class="btn btn-outline-secondary mx-2">預覽頁面</button>
-                    <button type="submit" id="saveDraft" class="btn btn-default mx-2 draft">儲存草稿</button>
-                    <button type="submit" id="saveEvent" class="btn btn-default mx-2">發佈活動</button>
+                    <button type="submit" id="saveEvent" class="btn btn-default mx-2">儲存草稿</button>
+                    <button type="submit" id="postEvent" class="btn btn-default mx-2">發佈活動</button>
                 </div>
             </form>
+            <input type="hidden" id="prevImagePath" value="{{ $event->image_path ?? '' }}">
+            <input type="hidden" id="prevAmTypeSelect" value="{{ $event->event_type_id ?? '' }}">
+            <input type="hidden" id="prevAmTitleInput" value="{{ $event->title ?? '' }}">
+            <input type="hidden" id="prevDeadlineInput" value="{{ $event->registration_date ?? '' }}">
+            <input type="hidden" id="prevJoinNumberInput" value="{{ $event->participants_amount ?? '' }}">
+            <input type="hidden" id="prevActivityDateInput" value="{{ is_null($event) ? '' : json_encode([$event->start_date, $event->end_date]) }}">
+            <input type="hidden" id="prevAmLocationInput" value="{{ $event->location ?? '' }}">
+            <input type="hidden" id="prevOrganiserEmailInput" value="{{ $event->contact_method ?? '' }}">
+            <input type="hidden" id="prevOrganizerInfoTextarea" value="{{ $event->introduction ?? '' }}">
+            <input type="hidden" id="prevAmGoalPlanTextarea" value="{{ $event->plan ?? '' }}">
+            <input type="hidden" id="prevOrganizerInfoTextarea" value="{{ $event->introduction ?? '' }}">
+            <input type="hidden" id="prevDetail" value="{{ $event->delta_json ?? '' }}">
+            <input type="hidden" id="prevAmNoticeTextarea" value="{{ $event->note ?? '' }}">
         </div>
     </div>
     
