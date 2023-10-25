@@ -62,7 +62,7 @@ class AuthController extends Controller
         //mail
         $token = encrypt(['id' => $id]);
         Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$token")));
-        return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful']);
+        return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful', 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
     public function registerSuccess(string $token): View
@@ -101,9 +101,9 @@ class AuthController extends Controller
     public function updatePassword(Request $request): bool
     {
         $is_updated = false;
-        $email = decrypt($request->input('email'));
-        if (!is_null($this->userRepository->getByEmail($email))) {
-            $is_updated = $this->userRepository->updatePassword($email, $request->input('password'));
+        $result = decrypt($request->input('email'));
+        if (!is_null($this->userRepository->getByEmail($result['email']))) {
+            $is_updated = $this->userRepository->updatePassword($result['email'], $request->input('password'));
         }
         return $is_updated;
     }

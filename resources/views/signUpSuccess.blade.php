@@ -15,12 +15,11 @@
         <div class="sm-wrap pb-5">
             @if ($isVerify)
             <div class="main-title">歡迎加入</div>
-            <form action="index.html" >
+            <form action="/" >
                 <div class="my-5 text-center text-dark-emphasis">
                     <span class="text-bg-color nick-name-text">{{ $nickname }}</span> 歡迎您加入 Let‘s Study，恭喜您的帳戶已成功開通。
                 </div>
                 <div class="text-center mb-3">
-                    <a class="nav-link btn btn-light btn-sm btn-signUp" href="/">開始使用</a>
                     <button type="submit" class="btn btn-default">開始使用</button><!--帶dashboard url及帳號資訊-->
                 </div>
             </form>

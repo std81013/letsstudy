@@ -9,22 +9,30 @@ class EventRepository
 {
     public function getById(int $id)
     {
-        return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.id', $id)->get()->first();
+        return Event::select('events.*', 'event_types.name', 'users.nickname as organizer')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->join('users', 'events.created_by', '=', 'users.id')->where('events.id', $id)->get()->first();
     }
 
     public function getByParticipant(int $userId)
     {
-        return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->whereRaw("INSTR(participants, \"$userId\")")->get();
+        return Event::select('events.*', 'event_types.name', 'event_types.type_name')
+            ->join('event_types', 'events.event_type_id', '=', 'event_types.id')
+            ->join('event_participants', function ($join) use ($userId) {
+                $join->on('event_participants.participant_id', '=', $userId)
+                     ->whereRaw('INSTR(participants, event_participants.id) > 0');
+            })
+            ->where('events.is_post', 1)
+            ->whereNotNull('event_participants.id')
+            ->get();
     }
 
     public function getByCreatedBy(int $userId)
     {
-        return Event::select('events.*', 'event_types.name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
+        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
     }
 
     public function getList()
     {
-        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->get();
+        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.is_post', 1)->get();
     }
 
     public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '[]', string $description = '')
@@ -78,5 +86,20 @@ class EventRepository
                 'is_post' => $isPost,
                 'image_path' => $imagePath,
             ]);
+    }
+
+    public function updateParticipant(string $id, string $participantId)
+    {
+        $event = Event::find($id);
+        $participants = json_decode($event->participants);
+        $participants[] = $participantId;
+        $event->participants = json_encode($participants);
+        return $event->save();
+    }
+
+    public function deleteEvent(string $id)
+    {
+        return Event::where('id', $id)
+            ->update(['is_post' => 9]);
     }
 }

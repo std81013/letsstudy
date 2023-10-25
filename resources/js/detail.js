@@ -96,6 +96,29 @@ $(function() {
           $('#isPost').val('0');
         });
     });
+
+    $('#deleteEvent').on('click', function (event) {
+      event.preventDefault();
+      $('#isPost').val('9');
+
+      let formData = new FormData(document.getElementById('activityManageForm'));
+      formData.append('_token', $('#csrfToken').val());
+
+      $.ajax({
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        url: '/event/delete',
+      }).done(function( success ) {
+        if ( success ) {
+          alert('解散成功');
+          window.location.href = '/event/list'; 
+        } else {
+          alert('解散失敗');
+        }
+      });
+    });
 });
 
 function getFormatedDateTime(date) {

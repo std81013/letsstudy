@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/js/datepicker.js'])
+    @vite(['resources/css/app.css','resources/js/app.js','resources/js/main.js', 'resources/js/detail.js'])
 
     <script type="module" src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
@@ -108,6 +108,9 @@
                 <div class="text-center mb-3">
                     <input type="hidden" value="0" name="isPost" id="isPost">
                     <input type="hidden" value="{{ $event->id ?? '' }}" name="id" id="id">
+                    @if (!is_null($event))
+                    <button type="submit" id="deleteEvent" class="btn btn-outline-secondary mx-2">解散</button>
+                    @endif
                     <button type="submit" class="btn btn-outline-secondary mx-2">預覽頁面</button>
                     <button type="submit" id="saveEvent" class="btn btn-default mx-2">儲存草稿</button>
                     <button type="submit" id="postEvent" class="btn btn-default mx-2">發佈活動</button>

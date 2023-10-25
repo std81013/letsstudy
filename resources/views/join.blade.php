@@ -27,21 +27,21 @@
                 <div class="mb-3 row">
                     <div class="col-md-4">
                         <label for="joinMemberInput" class="form-label">參加者姓名</label>
-                        <input type="text" class="form-control" id="joinMemberInput" placeholder="" required>
+                        <input type="text" class="form-control" id="joinMemberInput" name="joinMemberInput" placeholder="" required value="{{ $user->nickname ?? '' }}">
                     </div>
                     <div class="col-md-4">
                         <label for="contactEmailInput" class="form-label">連絡 Email</label>
-                        <input type="email" class="form-control" id="contactEmailInput" placeholder="xxx@gmail.cpm" required>
+                        <input type="email" class="form-control" id="contactEmailInput" name="contactEmailInput" placeholder="xxx@gmail.cpm" required value="{{ $user->email ?? '' }}">
                     </div>
                     <div class="col-md-4">
                         <label for="contactNumberInput" class="form-label">聯絡電話</label>
-                        <input type="text" class="form-control" id="contactNumberInput" placeholder="09xxxxxxxx" required>
+                        <input type="text" class="form-control" id="contactNumberInput" name="contactNumberInput" placeholder="09xxxxxxxx" required>
                     </div>
                     
                 </div>
                 <div class="mb-3">
                     <label for="memberRemarkTextarea" class="form-label">備註</label>
-                    <textarea name="" id="memberRemarkTextarea" cols="30" rows="3" class="form-control" required>無</textarea>
+                    <textarea name="memberRemarkTextarea" id="memberRemarkTextarea" cols="30" rows="3" class="form-control" required>無</textarea>
                     <div id="" class="form-text">
                         請輸入要留言給主辦人的話，若沒有請輸入“無”。
                     </div>
@@ -55,6 +55,8 @@
                     </div>
                 </div>
                 <div class="text-center mb-3">
+                    <input type="hidden" value="{{ $event->id }}" name="eventId">
+                    <input type="hidden" value="{{ $user->id ?? 0 }}" name="userId">
                     <button type="submit" class="btn btn-default">確認報名</button>
                 </div>
             </form>

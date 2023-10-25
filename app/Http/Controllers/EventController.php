@@ -7,19 +7,23 @@ use Illuminate\View\View;
 use App\Repositories\EventRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\EventTypeRepository;
+use App\Repositories\EventParticipantRepository;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Event\ViewPageData;
 
 class EventController extends Controller
 {
     private $eventRepository;
     private $userRepository;
     private $eventTypeRepository;
-    public function __construct(EventRepository $eventRepository, EventTypeRepository $eventTypeRepository, UserRepository $userRepository)
+    private $eventParticipantRepository;
+    public function __construct(EventRepository $eventRepository, EventTypeRepository $eventTypeRepository, UserRepository $userRepository, EventParticipantRepository $eventParticipantRepository)
     {
         $this->eventRepository = $eventRepository;
         $this->userRepository = $userRepository;
         $this->eventTypeRepository = $eventTypeRepository;
+        $this->eventParticipantRepository = $eventParticipantRepository;
     }
 
     public function dashboard(): View
@@ -27,20 +31,24 @@ class EventController extends Controller
         return view('dashboard', ['eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
-    public function list(): View
+    public function list(Request $request): View
     {
-        $userId = 1;
-        return view('eventList', ['joinedEvents' => $this->eventRepository->getByParticipant($userId), 'postedEvents' => $this->eventRepository->getByCreatedBy($userId)]);
+        $user = $this->userRepository->getByToken($request->session()->get('token'));
+        return view('eventList', ['joinedEvents' => $this->eventRepository->getByParticipant($user->id), 'postedEvents' => $this->eventRepository->getByCreatedBy($user->id)]);
     }
 
-    public function view(string $id): View
+    public function view(string $id, Request $request): View
     {
-        return view('eventDetail', ['event' => $this->eventRepository->getById($id)]);
+        $viewPageData = $this->getViewPageData($id);
+        if (!is_null($request->session()->get('token'))) {
+            $viewPageData->user = $this->userRepository->getByToken($request->session()->get('token'));
+        }
+        return view('eventDetail', ['viewPageData' => $viewPageData]);
     }
 
-    public function join(string $id): View
+    public function join(string $eventId, string $userId): View
     {
-        return view('join', ['event' => $this->eventRepository->getById($id)]);
+        return view('join', ['event' => $this->eventRepository->getById($eventId), 'user' => $this->userRepository->getById($userId)]);
     }
 
     public function manage(string $id = null): View
@@ -74,5 +82,42 @@ class EventController extends Controller
             $request->input('joinNumberInput'), $request->input('amGoalPlanTextarea'), $request->input('detail'), $request->input('delta_json'), $user->id, $request->input('amNoticeTextarea'), $request->input('isPost'), $path, $currentDatetime);
         }
         return true;
+    }
+
+    public function joinEvent(Request $request): view
+    {
+        $currentDatetime = date('Y-m-d H:i:s');
+        $id = $this->eventParticipantRepository->create($request->input('eventId'), $request->input('joinMemberInput'), $request->input('userId'), $request->input('contactEmailInput'), $request->input('contactNumberInput'), $currentDatetime);
+        $this->eventRepository->updateParticipant($request->input('eventId'), $id);
+        $viewPageData = $this->getViewPageData($request->input('eventId'));
+        if (!is_null($request->session()->get('token'))) {
+            $viewPageData->user = $this->userRepository->getByToken($request->session()->get('token'));
+        }
+        return view('eventDetail', ['viewPageData' => $viewPageData]);
+    }
+
+    public function deleteEvent(string $id, Request $request)
+    {
+        $user = $this->userRepository->getByToken($request->session()->get('token'));
+        $this->eventRepository->deleteEvent($id);
+        return view('eventList', ['joinedEvents' => $this->eventRepository->getByParticipant($user->id), 'postedEvents' => $this->eventRepository->getByCreatedBy($user->id)]);
+    }
+
+    public function delete(Request $request)
+    {
+        $user = $this->userRepository->getByToken($request->session()->get('token'));
+        return $this->eventRepository->deleteEvent($request->input('id'));
+    }
+
+    private function getViewPageData(string $eventId): ViewPageData
+    {
+        $viewPageData = new ViewPageData();
+        $viewPageData->event = $this->eventRepository->getById($eventId);
+        $viewPageData->participants = [];
+        $participantIds = json_decode($viewPageData->event->participants);
+        if (count($participantIds) > 0) {
+            $viewPageData->participants = $this->eventParticipantRepository->getByIds($participantIds);
+        }
+        return $viewPageData;
     }
 }

@@ -36,12 +36,12 @@
                             <div class="tab-pane fade show active" id="join-notStart" role="tabpanel" aria-labelledby="join-notStart-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($joinedEvents as $event)
-                                        @if ($event->start_date > date('Y/m/d') && $event->is_post == 1)
+                                        @if ($event->start_date > date('Y-m-d H:i:s') && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -64,12 +64,12 @@
                             <div class="tab-pane fade" id="join-started" role="tabpanel" aria-labelledby="join-started-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($joinedEvents as $event)
-                                        @if ($event->start_date <= date('Y/m/d') && date('Y/m/d') <= $event->end_date && $event->is_post == 1)
+                                        @if ($event->start_date <= date('Y-m-d H:i:s') && date('Y-m-d H:i:s') <= $event->end_date && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -92,12 +92,12 @@
                             <div class="tab-pane fade" id="join-over" role="tabpanel" aria-labelledby="join-over-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($joinedEvents as $event)
-                                        @if ($event->end_date < date('Y/m/d') && $event->is_post == 1)
+                                        @if ($event->end_date < date('Y-m-d H:i:s') && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -138,14 +138,14 @@
                             <div class="tab-pane fade show active" id="initiate-notStart" role="tabpanel" aria-labelledby="initiate-notStart-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($postedEvents as $event)
-                                        @if ($event->start_date > date('Y/m/d') && $event->is_post == 1)
+                                        @if ($event->start_date > date('Y-m-d H:i:s') && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
                                                 <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <button class="btn btn-sm"><a href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -168,14 +168,14 @@
                             <div class="tab-pane fade" id="initiate-started" role="tabpanel" aria-labelledby="initiate-started-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($postedEvents as $event)
-                                        @if ($event->start_date <= date('Y/m/d') && date('Y/m/d') <= $event->end_date && $event->is_post == 1)
+                                        @if ($event->start_date <= date('Y-m-d H:i:s') && date('Y-m-d H:i:s') <= $event->end_date && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
                                                 <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-address-book"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <button class="btn btn-sm"><a href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -204,8 +204,8 @@
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
                                                 <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <button class="btn btn-sm"><a href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -228,13 +228,13 @@
                             <div class="tab-pane fade" id="initiate-over" role="tabpanel" aria-labelledby="initiate-over-tab" tabindex="0">
                                 <ul class="am-list">
                                     @foreach ($postedEvents as $event)
-                                        @if ($event->end_date < date('Y/m/d') && $event->is_post == 1)
+                                        @if ($event->end_date < date('Y-m-d H:i:s') && $event->is_post == 1)
                                     <li class="am-item">
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-eye"></i></button>
-                                                <button class="btn btn-sm"><i class="fa-solid fa-address-book"></i></button>
+                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <button class="btn btn-sm"><a href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a></button>
                                             </div>
                                             <div class="am-info">
                                                 <div>
