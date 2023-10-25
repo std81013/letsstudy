@@ -127,7 +127,7 @@
             <input type="hidden" id="prevOrganizerInfoTextarea" value="{{ $event->introduction ?? '' }}">
             <input type="hidden" id="prevAmGoalPlanTextarea" value="{{ $event->plan ?? '' }}">
             <input type="hidden" id="prevOrganizerInfoTextarea" value="{{ $event->introduction ?? '' }}">
-            <input type="hidden" id="prevDetail" value="{{ $event->delta_json ?? '' }}">
+            <input type="hidden" id="prevDetail" value="{{ $event->delta_json ?? '{}' }}">
             <input type="hidden" id="prevAmNoticeTextarea" value="{{ $event->note ?? '' }}">
         </div>
     </div>
