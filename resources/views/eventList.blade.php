@@ -41,7 +41,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -69,7 +69,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -97,7 +97,7 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -143,9 +143,9 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
+                                                <a class="btn btn-sm" href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -173,9 +173,9 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
+                                                <a class="btn btn-sm" href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -203,9 +203,9 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/edit/{{ $event->id }}"><i class="fa-solid fa-pencil"></i></a>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
+                                                <a class="btn btn-sm" href="/event/delete/{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>
@@ -233,8 +233,8 @@
                                         <div class="am-content">
                                             <div class="am-title">
                                                 <span class="me-auto">{{ $event->title }}</span>
-                                                <button class="btn btn-sm"><a href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a></button>
-                                                <button class="btn btn-sm"><a href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a></button>
+                                                <a class="btn btn-sm" href="/event/view/{{ $event->id }}"><i class="fa-solid fa-eye"></i></a>
+                                                <a class="btn btn-sm" href="/user/introduction/{{ $event->created_by }}"><i class="fa-solid fa-address-book"></i></a>
                                             </div>
                                             <div class="am-info">
                                                 <div>

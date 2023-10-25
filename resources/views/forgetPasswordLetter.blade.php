@@ -16,16 +16,15 @@
               <!-- 1 Column Text : BEGIN -->
               <tr>
                 <td style="padding: 40px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;" align="center">
-                 感謝您註冊 Let's Study！ 只剩下一個步驟，您就能開心使用了。 <br><br>
-
-請按一下下列連結驗證您的 Let's Study 帳戶： 
+                 請點選以下按鈕為您的 <span style="color:#35647e;">xxxxxx@gmail.com </span> 帳戶重設您的密碼。
                   <br><br>
 
-<a href="{{ $url }}" style="font-size:20px;font-family:Open Sans,Lucida,Lucida Sans,Lucida Grande,Arial,sans-serif!important;font-weight:normal;color:#ffffff;text-decoration:none;background-color:#35647e;border-top:15px solid #35647e;border-bottom:15px solid #35647e;border-left:25px solid #35647e;border-right:25px solid #35647e; border-radius:3px;display:inline-block" target="_blank" data-saferedirecturl="#"><span class="il">驗證</span>我的帳戶</a> 
+<a href="{{ $url }}" style="font-size:20px;font-family:Open Sans,Lucida,Lucida Sans,Lucida Grande,Arial,sans-serif!important;font-weight:normal;color:#ffffff;text-decoration:none;background-color:#35647e;border-top:15px solid #35647e;border-bottom:15px solid #35647e;border-left:25px solid #35647e;border-right:25px solid #35647e; border-radius:3px;display:inline-block" target="_blank" data-saferedirecturl="#"><span class="il">重設</span>我的密碼</a> 
                   <br><br><br>
-                   好了！ 您怎麼還在讀這封電子郵件？ 
-                   <br><br>
-                  登入 <a href="#" style="color: #000"><strong>Let's Study</strong></a> 動手使用吧！
+                   提醒您，新密碼將在重設後立即生效， <br><br>
+                  請妥善保管個人帳號密碼資訊，<br><br>
+                  以防個人帳號資料遭盜用。<br><br> <br>
+                  <strong>如果您並未要求重設密碼，可以忽略這封電子郵件。</strong>
                   <br /> <br /> <br>
                   此電子郵件由系統自動發出，請勿直接回覆，謝謝您。
                   <br /> <br /> <br />

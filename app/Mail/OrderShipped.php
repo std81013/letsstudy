@@ -15,12 +15,15 @@ class OrderShipped extends Mailable
 
     private $url;
 
+    private $mailView;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(string $url)
+    public function __construct(string $url, string $mailView)
     {
         $this->url = $url;
+        $this->mailView = $mailView;
     }
 
     /**
@@ -39,7 +42,7 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'registerVerificationLetter',
+            view: $this->mailView,
             with: [
                 'url' => $this->url,
             ],

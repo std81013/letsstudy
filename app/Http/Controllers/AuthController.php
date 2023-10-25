@@ -61,7 +61,7 @@ class AuthController extends Controller
 
         //mail
         $token = encrypt(['id' => $id]);
-        Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$token")));
+        Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$token"), 'registerVerificationLetter'));
         return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful', 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
@@ -88,7 +88,7 @@ class AuthController extends Controller
         $email = $request->input('email');
         if (!is_null($this->userRepository->getByEmail($email))) {
             $uri = encrypt(['email' => $email]);
-            Mail::to($email)->send(new OrderShipped(url("/user/resetPassword?email={$uri}")));
+            Mail::to($email)->send(new OrderShipped(url("/user/resetPassword?email={$uri}"), 'forgetPasswordLetter'));
         }
         return true;
     }
