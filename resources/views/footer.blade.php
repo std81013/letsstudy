@@ -4,9 +4,9 @@
             <div class="col-6 col-sm-3 mb-3">
                 <ul>
                     <li><div class="title">關於</div></li>
-                    <li><a href="about.html">關於我們</a></li>
-                    <li><a href="service.html">服務條款</a></li>
-                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="/about">關於我們</a></li>
+                    <li><a href="/service">服務條款</a></li>
+                    <li><a href="/privacy">隱私權政策</a></li>
                 </ul>
             </div>
             <div class="col-6 col-sm-3 mb-3">

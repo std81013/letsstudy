@@ -1,15 +1,62 @@
 
 $(function() {
     flatpickr(".anotherSelector", {});
-    let activityDateSettings = {
-        mode: "range",
-        enableTime: true,
-        minDate: "today",
-        minTime: "00:00",
-        dateFormat: "Y-m-d H:i"
-    };
+    flatpickr("#activityStartDateInput", {
+      minDate: "today",
+      dateFormat: "Y-m-d",
+      onClose: function(selectedDates) {
+          // 在選擇日期後的操作
+          if (selectedDates.length > 0) {
+              // 如果選擇了日期，將相應的時間輸入框解除禁用
+              $('#activityStartTimeInput').prop('disabled', false);
+          } else {
+              // 如果未選擇日期，保持相應的時間輸入框禁用
+              $('#activityStartTimeInput').prop('disabled', true);
+          }
+      }
+    });
 
-    var quill = new Quill( "#editor", {
+    flatpickr("#activityEndDateInput", {
+      minDate: "today",
+      dateFormat: "Y-m-d",
+        onClose: function(selectedDates) {
+            // 在選擇日期後的操作
+            if (selectedDates.length > 0) {
+                // 如果選擇了日期，將相應的時間輸入框解除禁用
+                $('#activityEndTimeInput').prop('disabled', false);
+            } else {
+                // 如果未選擇日期，保持相應的時間輸入框禁用
+                $('#activityEndTimeInput').prop('disabled', true);
+            }
+        }
+    });
+
+    flatpickr("#activityStartTimeInput", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i", // 24 小时制
+      // 或者使用下面的选项进行 12 小时制
+      // dateFormat: "h:i K", // 12 小时制
+      disableMobile: true // 在移动设备上禁用原生时间选择器
+    });
+    flatpickr("#activityEndTimeInput", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i", // 24 小时制
+      // 或者使用下面的选项进行 12 小时制
+      // dateFormat: "h:i K", // 12 小时制
+      disableMobile: true // 在移动设备上禁用原生时间选择器
+    });
+
+    if ($('#activityEndTimeInput').val() != '') {
+      $('#activityEndTimeInput').prop('disabled', false);
+    }
+
+    if ($('#activityStartTimeInput').val() != '') {
+      $('#activityStartTimeInput').prop('disabled', false);
+    }
+
+    var quill = new Quill( "#amDetailsTextarea", {
         theme: "snow",
         modules: {
             toolbar: [
@@ -47,11 +94,8 @@ $(function() {
         $('#amNoticeTextarea').val($('#prevAmNoticeTextarea').val());
         flatpickr(".anotherSelector").setDate($('#prevDeadlineInput').val());
 
-        activityDateSettings.defaultDate = JSON.parse($('#prevActivityDateInput').val());
-        
         quill.setContents(JSON.parse($('#prevDetail').val()));
     }
-    flatpickr("#activityDateInput", activityDateSettings);
 
     $('#postEvent, #saveEvent').on('click', function (event) {
         event.preventDefault();
@@ -60,7 +104,7 @@ $(function() {
         }
     
         let formData = new FormData(document.getElementById('activityManageForm'));
-        formData.append('detail', $('#editor .ql-editor')[0].innerHTML);    
+        formData.append('detail', $('#amDetailsTextarea .ql-editor')[0].innerHTML);    
         formData.append('delta_json', JSON.stringify(quill.getContents()));
         formData.append('_token', $('#csrfToken').val());
     
@@ -72,9 +116,15 @@ $(function() {
         let registrationDateElement = document.getElementById("deadlineInput")._flatpickr;
         formData.append('registrationDate', getFormatedDate(registrationDateElement.selectedDates[0]));
     
-        let activityDateElement = document.getElementById("activityDateInput")._flatpickr;
-        formData.append('startDate', getFormatedDateTime(activityDateElement.selectedDates[0]));
-        formData.append('endDate', getFormatedDateTime(activityDateElement.selectedDates[1]));
+        let activityStartDateElement = document.getElementById("activityStartDateInput")._flatpickr;
+        let activityStartTimeElement = document.getElementById("activityStartTimeInput")._flatpickr;
+        formData.append('startDate', getFormatedDate(activityStartDateElement.selectedDates[0]) + ' ' + getFormatedTime(activityStartTimeElement.selectedDates[0]));
+
+        if ($('#disableDate').is(':checked') == false) {
+          let activityEndDateElement = document.getElementById("activityEndDateInput")._flatpickr;
+          let activityEndTimeElement = document.getElementById("activityEndTimeInput")._flatpickr;
+          formData.append('endDate', getFormatedDate(activityEndDateElement.selectedDates[0]) + ' ' + getFormatedTime(activityEndTimeElement.selectedDates[0]));
+        }
     
         $.ajax({
           method: 'POST',
@@ -119,12 +169,28 @@ $(function() {
         }
       });
     });
+
+    $('#disableDate').on('change',function() {
+      if(this.checked) {
+          // 當checkbox被勾選時，設定日期和時間輸入框為disabled狀態
+          $('#activityEndDateInput').prop('disabled', true).val('');
+          $('#activityEndTimeInput').prop('disabled', true).val('');
+          $('#activityEndDateInput-error').remove();
+      } else {
+          // 當checkbox未被勾選時，移除日期和時間輸入框的disabled狀態
+          $('#activityEndDateInput').prop('disabled', false);
+          $('#activityEndTimeInput').prop('disabled', true);
+      }
+    });
+    if ($('#activityEndDateInput').val() == '' && $('#activityEndTimeInput').val() == '') {
+      $('#disableDate').prop('checked', true).trigger('change');
+    }
 });
 
-function getFormatedDateTime(date) {
+function getFormatedTime(date) {
     let hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
     let minutes =  (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
-    return getFormatedDate(date) + ' ' + hours + ':' + minutes;
+    return hours + ':' + minutes;
 }
   
 function getFormatedDate(date) {

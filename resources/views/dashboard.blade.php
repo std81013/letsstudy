@@ -47,7 +47,7 @@
                             <a href="/event/view/{{ $event->id }}">
                                 <div class="title">{{ $event->title }}</div>
                                 <div class="intro-content">{{ $event->introduction }}</div>
-                                <div class="dateTime-content"><i class="fa-solid fa-calendar-days"></i> {{ $event->start_date }} ~ {{ $event->end_date }} </div>
+                                <div class="dateTime-content"><i class="fa-solid fa-calendar-days"></i> {{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }} </div>
                                 <div class="location-content"><i class="fa-solid fa-location-dot"></i> {{ $event->location }} </div>                                
                             </a>
                         </div>

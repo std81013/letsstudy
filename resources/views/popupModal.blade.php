@@ -8,7 +8,7 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <form method="POST" action="/login">
+                <form method="POST" id="loginForm" action="/login">
                     @csrf
                     <div class="mb-3">
                         <label for="emailInput" class="form-label">請輸入您的 Email</label>
@@ -39,7 +39,7 @@
                 <h5 class="modal-title" id="forgetPasswordModalLabel">忘記密碼</h5>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="forgetPasswordForm">
                     <div class="mb-3">
                         請輸入註冊 Lest Study 的 Email 信箱，我們將寄送【 重設密碼驗證信 】！
                     </div>
@@ -48,7 +48,7 @@
                         <input type="email" class="form-control" id="forgetPwEmailInput" placeholder="name@example.com">
                     </div>
                     <div class="text-center mb-3"><!--ajax  並送user田的帳號-->
-                        <button type="button" class="btn btn-default" id="resetPwBtn">重設密碼</button>
+                        <button type="submit" class="btn btn-default">重設密碼</button>
                     </div>
                 </form>
                 <div class="text-center">

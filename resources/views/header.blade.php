@@ -38,7 +38,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="offcanvasNavbarDropdown">
                                     <li><a class="dropdown-item" href="/event/add">活動發表</a></li>
                                     <li><a class="dropdown-item" href="/event/list">我的活動</a></li>
-                                    <li><a class="dropdown-item" href="account.html">帳號資料</a></li>
+                                    <li><a class="dropdown-item" href="/account">帳號資料</a></li>
                                     <li><a class="dropdown-item" href="/logout">登出</a></li>
                                 </ul>
                             </li>

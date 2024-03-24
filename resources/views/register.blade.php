@@ -14,7 +14,7 @@
     <div class="container-xxl main-wrap">
         <div class="sm-wrap pb-5">
             <div class="main-title">註冊</div>
-            <form method="POST" action="/user/store" >
+            <form method="POST" id="signupForm" action="/user/store" >
                 @csrf
                 <div class="mb-3">
                     <label for="signUpEmailInput" class="form-label">註冊信箱</label>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="my-4">
                     <div id="" class="form-text">
-                        ※ 當您按下「註冊」鈕，即表示您同意網站 <a href="service.html" target="_blank">服務條款</a> 以及 <a href="privacy.html" target="_blank">隱私權政策</a>。
+                        ※ 當您按下「註冊」鈕，即表示您同意網站 <a href="/service" target="_blank">服務條款</a> 以及 <a href="/privacy" target="_blank">隱私權政策</a>。
                     </div>
                 </div>
                 <div class="text-center mb-3">

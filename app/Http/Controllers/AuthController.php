@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\EventTypeRepository;
 use App\Mail\OrderShipped;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     private $userRepository;
     private $eventRepository;
     private $eventTypeRepository;
-    private $urlKey = 'letstudy';
     public function __construct(UserRepository $userRepository, EventRepository $eventRepository, EventTypeRepository $eventTypeRepository)
     {
         $this->userRepository = $userRepository;
@@ -34,7 +31,7 @@ class AuthController extends Controller
         if ($isExist) {
             $token = Str::uuid();
             $request->session()->put('token', $token);
-            $this->userRepository->updateUserToken($request->input('email'), $request->input('password'), $token);
+            $this->userRepository->updateToken($request->input('email'), $request->input('password'), $token);
         }
         return view('dashboard', ['token' => $token, 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
@@ -45,23 +42,31 @@ class AuthController extends Controller
         return view('dashboard', ['token' => null, 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
-    public function register(Request $request): View
+    public function register(): View
     {
         return view('register');
     }
 
     public function store(Request $request): View
     {
-        //validate exist
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'nickname' => 'required|string'
+        ], [
+            'email.required' => '請輸入email',
+            'email.email' => '請輸入有效的email',
+            'email.unique' => '此email已被註冊',
+            'password.required' => '請輸入密碼',
+            'password.min' => '請輸入至少:min字元'
+        ]);
 
-        //store
         $registerDatetime = date('Y-m-d H:i:s');
         $token = md5($registerDatetime);
-        $id = $this->userRepository->createUser($request->input('email'), $request->input('password'), $request->input('nickname'), $registerDatetime, $token);
+        $id = $this->userRepository->create($request->input('email'), $request->input('password'), $request->input('nickname'), $registerDatetime, $token);
 
-        //mail
-        $token = encrypt(['id' => $id]);
-        Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$token"), 'registerVerificationLetter'));
+        $uri = encrypt(['id' => $id]);
+        Mail::to($request->input('email'))->send(new OrderShipped(url("/register/successfully/$uri"), 'registerVerificationLetter'));
         return view('dashboard', ['auth' => false, 'showMessage' => 'store_successful', 'eventTypes' => $this->eventTypeRepository->getList(), 'events' => $this->eventRepository->getList()]);
     }
 
@@ -73,18 +78,23 @@ class AuthController extends Controller
 
         $userInfo = decrypt($token);
         if (isset($userInfo['id'])) {
-            $user = $this->userRepository->getById($userInfo['id']);
-            if (!is_null($user)) {
-                $nickname = $user->nickname;
-                $this->userRepository->updateIsVerify($userInfo['id'], 1);
+            $nickname = $this->userRepository->registration($userInfo['id']);
+            if (!is_null($nickname)) {
                 $isVerify = true;
             }
         }
-        return view('signUpSuccess', ['isVerify' => $isVerify, 'nickname' => $nickname, 'user' => $user]);
+        return view('signUpSuccess', ['isVerify' => $isVerify, 'nickname' => $nickname]);
     }
 
     public function sendForgetMail(Request $request): bool
     {
+        $request->validate([
+            'email' => 'required|string|email|max:255'
+        ], [
+            'email.required' => '請輸入email',
+            'email.email' => '請輸入有效的email'
+        ]);
+
         $email = $request->input('email');
         if (!is_null($this->userRepository->getByEmail($email))) {
             $uri = encrypt(['email' => $email]);
@@ -95,6 +105,13 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request): View
     {
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users'
+        ], [
+            'email.required' => '請輸入email',
+            'email.email' => '請輸入有效的email'
+        ]);
+
         return view('resetPassword', ['email' => $request->input('email')]);
     }
 
@@ -106,5 +123,39 @@ class AuthController extends Controller
             $is_updated = $this->userRepository->updatePassword($result['email'], $request->input('password'));
         }
         return $is_updated;
+    }
+
+    public function account(Request $request)
+    {
+        $user = $this->userRepository->getByToken($request->session()->get('token'));
+        $user->settings = json_decode($user->settings);
+        return view('account', ['user' => $user, 'showUpdateSuccess' => false]);
+    }
+
+    public function updateAccount(Request $request)
+    {
+        $request->validate([
+            'userId' => 'required|string',
+            'nickNameInput' => 'required|string',
+            'selfInfoTextarea1' => 'required|string',
+            'phoneNumInput' => 'required',
+            'genderOption' => 'required',
+            'birthdayInput' => 'required|string'
+        ]);
+
+        $this->userRepository->update(
+            $request->input('userId'),
+            $request->input('nickNameInput'),
+            $request->input('selfInfoTextarea1'),
+            $request->input('phoneNumInput'),
+            $request->input('genderOption'),
+            $request->input('birthdayInput'),
+            $request->input('displayEmail', false),
+            $request->input('displayJoinedEvent', false),
+            $request->input('displayHostEvent', false)
+        );
+        $user = $this->userRepository->getByToken($request->session()->get('token'));
+        $user->settings = json_decode($user->settings);
+        return view('account', ['user' => $user, 'showUpdateSuccess' => true]);
     }
 }

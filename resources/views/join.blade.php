@@ -48,9 +48,9 @@
                 </div>
                 <div class="my-4 text-center">
                     <div id="" class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="joinCheck">
-                        <label class="form-check-label" for="joinCheck">
-                            我已仔細閱讀「<a href="service.html" target="_blank">服務條款</a> 」，並同意遵守相關規定。 
+                        <input class="form-check-input" type="checkbox" value="" id="joinCheck" name="joinCheck" required>
+                        <label class="form-check-label join-check" for="joinCheck">
+                            我已仔細閱讀「<a href="/service" target="_blank">服務條款</a> 」，並同意遵守相關規定。 
                         </label>
                     </div>
                 </div>

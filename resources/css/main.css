@@ -13,18 +13,25 @@ body {
 a {
   transition: all .15s ease-in-out; }
   a:hover {
-    text-decoration: none; }
+    text-decoration: none;
+    opacity: .8; }
 
 ul {
   list-style: none;
   padding: 0;
   margin: 0; }
 
+h1, h2 {
+  font-size: 2em; }
+
 .text-bg-color {
   color: #35647e; }
 
-.notice-tip {
+.notice-tip, .error {
   color: #cd1d5d; }
+
+#joinCheck-error {
+  display: flex; }
 
 .btn-default {
   background-color: #35647e;
@@ -67,6 +74,11 @@ ul {
   max-width: 550px;
   width: 100%;
   margin: 1em auto; }
+
+.rule-wrap ol {
+  margin-bottom: 1.5em; }
+.rule-wrap h4 {
+  margin-bottom: 0.8em; }
 
 .tag-skill {
   background-color: #6ba1cb; }
@@ -530,6 +542,15 @@ footer {
     margin: 0.5rem 0 1.5rem;
     color: #666; }
 
+.date-group {
+  display: flex;
+  align-items: center;
+  gap: 0 5px; }
+  .date-group .date {
+    width: 30%; }
+  .date-group .time {
+    width: 20%; }
+
 .am-editor-box {
   min-height: 10rem;
   height: 100%;
@@ -537,6 +558,15 @@ footer {
   display: flex;
   flex-direction: column;
   background-color: #fff; }
+
+.makeSure-list h4 {
+  font-size: 1.1rem; }
+.makeSure-list .btn {
+  margin: 0 0.5rem; }
+.makeSure-list .btn-danger {
+  background-color: #c24646; }
+  .makeSure-list .btn-danger:hover {
+    background-color: #e05a5a; }
 
 @media (min-width: 768px) {
   .am-nav {

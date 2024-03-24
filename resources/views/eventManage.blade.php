@@ -65,9 +65,24 @@
                     <div class="col-sm-10">
                         <label for="amDateInput" class="form-label">活動時間</label>
                         <div>
-                            <input type="text" name="" id="activityDateInput" name="activityDateInput" class="form-control" required>
-                            <div id="" class="form-text">
-                                說明：可設定單日的日期時間或是有範圍的日期時間
+                            <div class="date-group">
+                                <div class="date">
+                                    <input type="text" name="activityStartDateInput" id="activityStartDateInput" class="form-control" required value="{{ is_null($eventDateInfo) ? '' : $eventDateInfo->start_date }}">
+                                </div>
+                                <div class="time">
+                                    <input type="text" name="activityStartTimeInput" id="activityStartTimeInput" class="form-control" required disabled value="{{ is_null($eventDateInfo) ? '' : $eventDateInfo->start_time }}">
+                                </div>
+                                <span>~</span>
+                                <div class="date">
+                                    <input type="text" name="activityEndDateInput" id="activityEndDateInput" class="form-control" required value="{{ is_null($eventDateInfo) ? '' : $eventDateInfo->end_date }}">
+                                </div>
+                                <div class="time">
+                                    <input type="text" name="activityEndTimeInput" id="activityEndTimeInput" class="form-control" required disabled value="{{ is_null($eventDateInfo) ? '' : $eventDateInfo->end_time }}">                                
+                                </div>
+
+                                <div class="mt-1">
+                                    <input type="checkbox" name="" id="disableDate"> <label for="disableDate">不設定結束時間</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,24 +111,23 @@
                 </div>
                 <div class="mb-3">
                     <label for="amDetailsTextarea" class="form-label">活動詳細內容</label>
-                    <div id="editor" name="editor"  class="am-editor-box">
+                    <div id="amDetailsTextarea" name="amDetailsTextarea"  class="am-editor-box">
                     </div>
                     <div id="" class="form-text">說明：輸入詳細的活動資訊，讓更多人清楚知道活動內容。</div>
                 </div>
                 <div class="mb-3">
                     <label for="amNoticeTextarea" class="form-label">注意事項</label>
-                    <textarea name="amNoticeTextarea" id="amNoticeTextarea" cols="30" rows="10" class="form-control" required>無</textarea>
+                    <textarea name="amNoticeTextarea" id="amNoticeTextarea" cols="30" rows="10" class="form-control">無</textarea>
                     <div id="" class="form-text">說明：可輸入需要大家遵守或注意的事項。</div>
                 </div>
                 <div class="text-center mb-3">
                     <input type="hidden" value="0" name="isPost" id="isPost">
                     <input type="hidden" value="{{ $event->id ?? '' }}" name="id" id="id">
-                    @if (!is_null($event))
-                    <button type="submit" id="deleteEvent" class="btn btn-outline-secondary mx-2">解散</button>
-                    @endif
-                    <button type="submit" class="btn btn-outline-secondary mx-2">預覽頁面</button>
+                    <!-- <button type="submit" class="btn btn-outline-secondary mx-2">預覽頁面</button> -->
+                    @if (is_null($event) || $event->is_post == 0)
                     <button type="submit" id="saveEvent" class="btn btn-default mx-2">儲存草稿</button>
-                    <button type="submit" id="postEvent" class="btn btn-default mx-2">發佈活動</button>
+                    @endif
+                    <button type="submit" id="postEvent" class="btn btn-default mx-2">{{ !is_null($event) && $event->is_post == 1 ? '儲存' : '發佈活動' }}</button>
                 </div>
             </form>
             <input type="hidden" id="prevImagePath" value="{{ $event->image_path ?? '' }}">
@@ -121,7 +135,6 @@
             <input type="hidden" id="prevAmTitleInput" value="{{ $event->title ?? '' }}">
             <input type="hidden" id="prevDeadlineInput" value="{{ $event->registration_date ?? '' }}">
             <input type="hidden" id="prevJoinNumberInput" value="{{ $event->participants_amount ?? '' }}">
-            <input type="hidden" id="prevActivityDateInput" value="{{ is_null($event) ? '' : json_encode([$event->start_date, $event->end_date]) }}">
             <input type="hidden" id="prevAmLocationInput" value="{{ $event->location ?? '' }}">
             <input type="hidden" id="prevOrganiserEmailInput" value="{{ $event->contact_method ?? '' }}">
             <input type="hidden" id="prevOrganizerInfoTextarea" value="{{ $event->introduction ?? '' }}">

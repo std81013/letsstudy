@@ -23,6 +23,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register']);
 
+Route::view('/about', 'about');
+Route::view('/service', 'service');
+Route::view('/privacy', 'privacy');
+
 Route::get('/event/view/{id}', [EventController::class, 'view']);
 
 Route::post('/send/forgetMail', [AuthController::class, 'sendForgetMail']);
@@ -31,6 +35,8 @@ Route::get('/user/resetPassword', [AuthController::class, 'resetPassword']);
 Route::post('/user/updatePassword', [AuthController::class, 'updatePassword']);
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/account', [AuthController::class, 'account']);
+    Route::post('/account/update', [AuthController::class, 'updateAccount']);
 
     Route::get('/event/list', [EventController::class, 'list']);
     Route::get('/event/add', [EventController::class, 'manage']);
@@ -46,5 +52,5 @@ Route::get('/event/join/{eventId}/{userId}', [EventController::class, 'join']);
 Route::post('/event/join', [EventController::class, 'joinEvent']);
 Route::get('/user/introduction/{id}', [UserController::class, 'introduction']);
 Route::get('/mail', function () {
-    Mail::to('s0952785388@gmail.com')->send(new OrderShipped());
+    Mail::to('s0952785388@gmail.com')->send(new OrderShipped('test', 'registerVerificationLetter'));
 });

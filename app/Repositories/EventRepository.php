@@ -2,19 +2,24 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\Log;
 use App\Models\Event;
 
 class EventRepository
 {
+    private $event;
+    public function __construct(Event $event)
+    {
+        $this->event = $event;
+    }
+
     public function getById(int $id)
     {
-        return Event::select('events.*', 'event_types.name', 'users.nickname as organizer')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->join('users', 'events.created_by', '=', 'users.id')->where('events.id', $id)->get()->first();
+        return $this->event->select('events.*', 'event_types.name', 'users.nickname as organizer')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->join('users', 'events.created_by', '=', 'users.id')->where('events.id', $id)->get()->first();
     }
 
     public function getByParticipant(int $userId)
     {
-        return Event::select('events.*', 'event_types.name', 'event_types.type_name')
+        return $this->event->select('events.*', 'event_types.name', 'event_types.type_name')
             ->join('event_types', 'events.event_type_id', '=', 'event_types.id')
             ->join('event_participants', function ($join) use ($userId) {
                 $join->on('event_participants.participant_id', '=', $userId)
@@ -27,45 +32,44 @@ class EventRepository
 
     public function getByCreatedBy(int $userId)
     {
-        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
+        return $this->event->select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('created_by', $userId)->get();
     }
 
     public function getList()
     {
-        return Event::select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.is_post', 1)->get();
+        return $this->event->select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.is_post', 1)->get();
     }
 
-    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '[]', string $description = '')
+    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, ?string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '[]', string $description = '')
     {
-        $event = new Event;
-        $event->title = $title;
-        $event->introduction = $introduction;
-        $event->description = $description;
-        $event->event_type_id = $eventTypeId;
-        $event->start_date = $startDate;
-        $event->end_date = $endDate;
-        $event->registration_date = $registrationDate;
-        $event->location = $location;
-        $event->contact_method = $contactMethod;
-        $event->participants_amount = $participantsAmount;
-        $event->participants = $participants;
-        $event->plan = $plan;
-        $event->detail = $detail;
-        $event->delta_json = $deltaJson;
-        $event->created_by = $userId;
-        $event->created_at = $datetime;
-        $event->updated_by = $userId;
-        $event->updated_at = $datetime;
-        $event->note = $note;
-        $event->is_post = $isPost;
-        $event->image_path = $imagePath;
-        $event->save();
-        return $event->id;
+        $this->event->title = $title;
+        $this->event->introduction = $introduction;
+        $this->event->description = $description;
+        $this->event->event_type_id = $eventTypeId;
+        $this->event->start_date = $startDate;
+        $this->event->end_date = $endDate;
+        $this->event->registration_date = $registrationDate;
+        $this->event->location = $location;
+        $this->event->contact_method = $contactMethod;
+        $this->event->participants_amount = $participantsAmount;
+        $this->event->participants = $participants;
+        $this->event->plan = $plan;
+        $this->event->detail = $detail;
+        $this->event->delta_json = $deltaJson;
+        $this->event->created_by = $userId;
+        $this->event->created_at = $datetime;
+        $this->event->updated_by = $userId;
+        $this->event->updated_at = $datetime;
+        $this->event->note = $note;
+        $this->event->is_post = $isPost;
+        $this->event->image_path = $imagePath;
+        $this->event->save();
+        return $this->event->id;
     }
 
-    public function updateEvent(string $id, string $title, string $introduction, string $eventTypeId, string $startDate, string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $description = '')
+    public function updateEvent(string $id, string $title, string $introduction, string $eventTypeId, string $startDate, ?string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $description = '')
     {
-        return Event::where('id', $id)
+        return $this->event->where('id', $id)
             ->update([
                 'title' => $title,
                 'introduction' => $introduction,
@@ -90,16 +94,16 @@ class EventRepository
 
     public function updateParticipant(string $id, string $participantId)
     {
-        $event = Event::find($id);
-        $participants = json_decode($event->participants);
+        $this->event->find($id);
+        $participants = json_decode($this->event->participants);
         $participants[] = $participantId;
-        $event->participants = json_encode($participants);
-        return $event->save();
+        $this->event->participants = json_encode($participants);
+        return $this->event->save();
     }
 
     public function deleteEvent(string $id)
     {
-        return Event::where('id', $id)
+        return $this->event->where('id', $id)
             ->update(['is_post' => 9]);
     }
 }

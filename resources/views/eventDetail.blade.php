@@ -38,7 +38,7 @@
                         <div class="ad-title">活動資訊</div>
                         <div class="ad-info">
                             <div class="ad-box-info">
-                                <div class="ad-sub-title">活動時間</div><span class="ad-sub-info">{{ $viewPageData->event->start_date }} ~ {{ $viewPageData->event->end_date }}</span>
+                                <div class="ad-sub-title">活動時間</div><span class="ad-sub-info">{{ $viewPageData->event->start_date }} {{ (is_null($viewPageData->event->end_date)) ? '' : ' ~ ' . $viewPageData->event->end_date }}</span>
                             </div>
                             <div class="ad-box-info">
                                 <div class="ad-sub-title">活動地點</div><span class="ad-sub-info">{{ $viewPageData->event->location }}</span>

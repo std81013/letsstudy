@@ -54,11 +54,24 @@ class EventController extends Controller
     public function manage(string $id = null): View
     {
         $event = null;
+        $eventDateInfo = null;
         if (!is_null($id)) {
             $event = $this->eventRepository->getById($id);
+            $eventDateInfo = new \stdClass();
+            $startDate = new \DateTime($event->start_date);
+            $eventDateInfo->start_date = $startDate->format('Y-m-d');
+            $eventDateInfo->start_time = $startDate->format('H:i');
+            if (is_null($event->end_date)) {
+                $eventDateInfo->end_date = '';
+                $eventDateInfo->end_time = '';
+            } else {
+                $endDate = new \DateTime($event->end_date);
+                $eventDateInfo->end_date = $endDate->format('Y-m-d');
+                $eventDateInfo->end_time = $endDate->format('H:i');
+            }
         }
 
-        return view('eventManage', ['event' => $event, 'eventTypes' => $this->eventTypeRepository->getListWithoutAll()]);
+        return view('eventManage', ['event' => $event, 'eventTypes' => $this->eventTypeRepository->getListWithoutAll(), 'eventDateInfo' => $eventDateInfo]);
     }
 
     public function store(Request $request)

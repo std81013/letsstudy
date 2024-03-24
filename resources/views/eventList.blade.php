@@ -46,7 +46,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -74,7 +74,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -102,7 +102,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -150,7 +150,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -180,7 +180,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -210,7 +210,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
@@ -239,7 +239,7 @@
                                             <div class="am-info">
                                                 <div>
                                                     <label for="">活動時間</label>
-                                                    <div class="date-info">{{ $event->start_date }} ~ {{ $event->end_date }}</div>
+                                                    <div class="date-info">{{ $event->start_date }} {{ (is_null($event->end_date)) ? '' : ' ~ ' . $event->end_date }}</div>
                                                 </div>
                                                 <div>
                                                     <label for="">報名人數</label>
