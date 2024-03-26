@@ -74,8 +74,6 @@ class AuthController extends Controller
     {
         $isVerify = false;
         $nickname = '';
-        $user = null;
-
         $userInfo = decrypt($token);
         if (isset($userInfo['id'])) {
             $nickname = $this->userRepository->registration($userInfo['id']);
@@ -128,7 +126,6 @@ class AuthController extends Controller
     public function account(Request $request)
     {
         $user = $this->userRepository->getByToken($request->session()->get('token'));
-        $user->settings = json_decode($user->settings);
         return view('account', ['user' => $user, 'showUpdateSuccess' => false]);
     }
 
@@ -155,7 +152,6 @@ class AuthController extends Controller
             $request->input('displayHostEvent', false)
         );
         $user = $this->userRepository->getByToken($request->session()->get('token'));
-        $user->settings = json_decode($user->settings);
         return view('account', ['user' => $user, 'showUpdateSuccess' => true]);
     }
 }

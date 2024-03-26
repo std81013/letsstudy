@@ -3,23 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Repositories\UserRepository;
 use App\Repositories\EventRepository;
-use App\Repositories\EventTypeRepository;
 
 class UserController extends Controller
 {
     private $userRepository;
     private $eventRepository;
-    private $eventTypeRepository;
-    public function __construct(UserRepository $userRepository, EventRepository $eventRepository, EventTypeRepository $eventTypeRepository)
+    public function __construct(UserRepository $userRepository, EventRepository $eventRepository)
     {
         $this->userRepository = $userRepository;
         $this->eventRepository = $eventRepository;
-        $this->eventTypeRepository = $eventTypeRepository;
     }
 
     public function introduction(string $id): View

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Event;
+use Illuminate\Support\Facades\Log;
 
 class EventRepository
 {
@@ -40,11 +41,11 @@ class EventRepository
         return $this->event->select('events.*', 'event_types.name', 'event_types.type_name')->join('event_types', 'events.event_type_id', '=', 'event_types.id')->where('events.is_post', 1)->get();
     }
 
-    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, ?string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime, string $participants = '[]', string $description = '')
+    public function createEvent(string $title, string $introduction, string $eventTypeId, string $startDate, ?string $endDate, string $registrationDate, string $location, string $contactMethod, string $participantsAmount, string $plan, string $detail, string $deltaJson, string $userId, string $note, string $isPost, string $imagePath, string $datetime)
     {
         $this->event->title = $title;
         $this->event->introduction = $introduction;
-        $this->event->description = $description;
+        $this->event->description = '';
         $this->event->event_type_id = $eventTypeId;
         $this->event->start_date = $startDate;
         $this->event->end_date = $endDate;
@@ -52,7 +53,7 @@ class EventRepository
         $this->event->location = $location;
         $this->event->contact_method = $contactMethod;
         $this->event->participants_amount = $participantsAmount;
-        $this->event->participants = $participants;
+        $this->event->participants = [];
         $this->event->plan = $plan;
         $this->event->detail = $detail;
         $this->event->delta_json = $deltaJson;
@@ -94,11 +95,11 @@ class EventRepository
 
     public function updateParticipant(string $id, string $participantId)
     {
-        $this->event->find($id);
-        $participants = json_decode($this->event->participants);
-        $participants[] = $participantId;
-        $this->event->participants = json_encode($participants);
-        return $this->event->save();
+        $participants = $this->event->find($id)->participants;
+        array_push($participants, $participantId);
+        Log::error($participants);
+        $this->event->where('id', $id)
+            ->update(['participants' => $participants]);
     }
 
     public function deleteEvent(string $id)

@@ -70,7 +70,7 @@ class UserRepository
 
     public function update(string $userId, string $nickname, string $introduction = null, string $phone, string $gender, string $birthday, bool $displayEmail = false, bool $displayJoinedEvent = false, bool $displayHostEvent = false)
     {
-        $settings = json_encode(["display_email" => $displayEmail, "display_joined_event" => $displayJoinedEvent, "display_host_event" => $displayHostEvent]);
+        $settings = ["display_email" => $displayEmail, "display_joined_event" => $displayJoinedEvent, "display_host_event" => $displayHostEvent];
         return $this->user->where('id', $userId)->update(['nickname' => $nickname, 'introduction' => $introduction, 'phone' => $phone, 'gender' => $gender, 'birthday' => $birthday, 'settings' => $settings]);
     }
 }

@@ -2,26 +2,30 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\Log;
 use App\Models\EventParticipant;
 
 class EventParticipantRepository
 {
+    private $eventParticipant;
+    public function __construct(EventParticipant $eventParticipant)
+    {
+        $this->eventParticipant = $eventParticipant;
+    }
+
     public function create(string $eventId, string $participant, string $participantId, string $email, string $mobileNumber, string $createdDatetime)
     {
-        $eventParticipant = new EventParticipant;
-        $eventParticipant->event_id = $eventId;
-        $eventParticipant->participant = $participant;
-        $eventParticipant->participant_id = $participantId;
-        $eventParticipant->email = $email;
-        $eventParticipant->mobile_number = $mobileNumber;
-        $eventParticipant->created_at = $createdDatetime;
-        $eventParticipant->save();
-        return $eventParticipant->id;
+        $this->eventParticipant->event_id = $eventId;
+        $this->eventParticipant->participant = $participant;
+        $this->eventParticipant->participant_id = $participantId;
+        $this->eventParticipant->email = $email;
+        $this->eventParticipant->mobile_number = $mobileNumber;
+        $this->eventParticipant->created_at = $createdDatetime;
+        $id = $this->eventParticipant->save();
+        return $id;
     }
 
     public function getByIds(array $ids)
     {
-        return EventParticipant::whereIn('id', $ids)->get();
+        return $this->eventParticipant->whereIn('id', $ids)->get();
     }
 }

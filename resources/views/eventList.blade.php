@@ -107,7 +107,7 @@
                                                 <div>
                                                     <label for="">報名人數</label>
                                                     <div class="peopleNumber-info">
-                                                        <span class="joined-number">{{ count(json_decode($event->participants)) }}</span>/{{ $event->participants_amount }}
+                                                        <span class="joined-number">{{ count($event->participants) }}</span>/{{ $event->participants_amount }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,7 +155,7 @@
                                                 <div>
                                                     <label for="">報名人數</label>
                                                     <div class="peopleNumber-info">
-                                                        <span class="joined-number">{{ count(json_decode($event->participants)) }}</span>/{{ $event->participants_amount }}
+                                                        <span class="joined-number">{{ count($event->participants) }}</span>/{{ $event->participants_amount }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,7 +185,7 @@
                                                 <div>
                                                     <label for="">報名人數</label>
                                                     <div class="peopleNumber-info">
-                                                        <span class="joined-number">{{ count(json_decode($event->participants)) }}</span>/{{ $event->participants_amount }}
+                                                        <span class="joined-number">{{ count($event->participants) }}</span>/{{ $event->participants_amount }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +215,7 @@
                                                 <div>
                                                     <label for="">報名人數</label>
                                                     <div class="peopleNumber-info">
-                                                        <span class="joined-number">{{ count(json_decode($event->participants)) }}</span>/{{ $event->participants_amount }}
+                                                        <span class="joined-number">{{ count($event->participants) }}</span>/{{ $event->participants_amount }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -244,7 +244,7 @@
                                                 <div>
                                                     <label for="">報名人數</label>
                                                     <div class="peopleNumber-info">
-                                                        <span class="joined-number">{{ count(json_decode($event->participants)) }}</span>/{{ $event->participants_amount }}
+                                                        <span class="joined-number">{{ count($event->participants) }}</span>/{{ $event->participants_amount }}
                                                     </div>
                                                 </div>
                                             </div>
